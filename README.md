@@ -22,3 +22,19 @@ Para correr el proyecto se deben usar los siguientes comandos:
 
 javac -cp .:json-simple-1.1.1.jar proyecto1.java
 java -cp .:json-simple-1.1.1.jar Planificador <nombre archivo prueba>
+
+# structs
+
+Para pruebas: main.java
+
+Estructuras:
+    * Process
+    * RedBlackBST
+    * Queue
+
+Original Sources: 
+  RBTBST: https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+  Queue:  https://algs4.cs.princeton.edu/43mst/Queue.java.html
+  Dependencies:
+    StdIn: https://introcs.cs.princeton.edu/java/stdlib/StdIn.java.html
+    StdOut: https://introcs.cs.princeton.edu/java/stdlib/StdOut.java.html
