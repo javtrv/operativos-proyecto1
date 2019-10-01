@@ -125,6 +125,17 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
 
         return min_vruntime;
     }
+
+
+    /**
+     * Returns the root of the tree
+     * @return
+     */
+
+     public Key get_root(){
+        return root.key;
+
+     }
     /**
      * Returns the number of key-value pairs in this symbol table.
      * 
@@ -177,6 +188,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
         return null;
     }
 
+
     /**
      * Does this symbol table contain the given key?
      * 
@@ -213,7 +225,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
 
         root = put(root, key, val);
         root.color = BLACK;
-        this.min_vruntime = min();
+        //this.min_vruntime = min();
         // assert check();
     }
 
@@ -482,6 +494,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
         return min(root).key;
     }
 
+    
     // the smallest key in subtree rooted at x; null if no such key
     private Node min(Node x) {
         // assert x != null;
