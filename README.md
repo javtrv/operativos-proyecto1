@@ -38,9 +38,9 @@ Estructuras:
 
 Original Sources: 
 
-  RBTBST: https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+    RedBlackBST: https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
 
-  Queue:  https://algs4.cs.princeton.edu/43mst/Queue.java.html
+    Queue:  https://algs4.cs.princeton.edu/43mst/Queue.java.html
 
   Dependencies:
 
