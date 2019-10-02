@@ -30,6 +30,9 @@
  ******************************************************************************/
 
 import java.util.NoSuchElementException;
+import java.util.LinkedList; 
+import java.util.Queue; 
+
 
 /**
  * The {@code BST} class represents an ordered symbol table of generic key-value
@@ -64,6 +67,7 @@ import java.util.NoSuchElementException;
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
+
 
 public class RedBlackBST<Key extends Comparable<Key>, Process> {
 
@@ -671,7 +675,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
      */
     public Iterable<Key> keys() {
         if (isEmpty())
-            return new Queue<Key>();
+            return new LinkedList<>();
         return keys(min(), max());
     }
 
@@ -692,7 +696,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
         if (hi == null)
             throw new IllegalArgumentException("second argument to keys() is null");
 
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new LinkedList<>();
         // if (isEmpty() || lo.compareTo(hi) > 0) return queue;
         keys(root, queue, lo, hi);
         return queue;
@@ -708,7 +712,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
         if (cmplo < 0)
             keys(x.left, queue, lo, hi);
         if (cmplo <= 0 && cmphi >= 0)
-            queue.enqueue(x.key);
+            queue.add(x.key);
         if (cmphi > 0)
             keys(x.right, queue, lo, hi);
     }
