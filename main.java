@@ -33,14 +33,6 @@ public class main {
         Process p49 = new Process("10", 10, 10, 10,9, 49);
         Process p98 = new Process("10", 10, 10, 10,9, 98);
 
-        /*
-        List<Integer> anotherList = Arrays.asList(2, 27, 19, 7, 25, 34, 31, 65, 49, 98);
-        for (int var : anotherList) {
-            st.put(Integer.toString(var), new Process(10, 10.0, 10.0, 9, var));
-            StdOut.println(var);
-        }*/
-        //st.put("2", p2);
-        //st.put("27", p27);
         
         st.put(2, p2);
         
