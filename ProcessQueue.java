@@ -9,11 +9,11 @@ public class ProcessQueue implements Iterable<Process>
     this.queue = new LinkedList<Process>();
   }
 
-  public void add_process(Process p){
+  public void add(Process p){
     this.queue.add(p);
   }
 
-  public Process delete_process(){
+  public Process remove(){
     return this.queue.remove();
   }
 
@@ -38,11 +38,11 @@ public class ProcessQueue implements Iterable<Process>
     Process proceso5 = new Process("5",72,40,8,8,88);
 
     // Añadimos los procesos a la cola
-    q.add_process(proceso1);
-    q.add_process(proceso2);
-    q.add_process(proceso3);
-    q.add_process(proceso4);
-    q.add_process(proceso5);
+    q.add(proceso1);
+    q.add(proceso2);
+    q.add(proceso3);
+    q.add(proceso4);
+    q.add(proceso5);
   
     // Enseñamos los elementos de la cola
     System.out.println("Elementos de la cola-"); 
@@ -52,7 +52,7 @@ public class ProcessQueue implements Iterable<Process>
       }
   
     // Para remover los elementos de la cola. 
-    Process removedele = q.delete_process(); 
+    Process removedele = q.remove(); 
     System.out.println("removed element-" + removedele.get_pid()); 
   
     System.out.println(q); 
