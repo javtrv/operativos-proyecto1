@@ -1,4 +1,4 @@
-# operativos-proyecto1
+# operativos-proyecto1: Simulador 
 Repositorio dedicado al proyecto 1 de la materia Operativos 2
 
 # Generador y Parser de Procesos
@@ -25,7 +25,7 @@ Para correr el proyecto se deben usar los siguientes comandos:
 javac -cp .:json-simple-1.1.1.jar proyecto1.java
 java -cp .:json-simple-1.1.1.jar Planificador <nombre archivo prueba>
 
-# structs
+# Estructuras
 
 Para pruebas: main.java
 
@@ -33,16 +33,16 @@ Estructuras:
 
     * Process
 
-    * RedBlackBST
+    * RedBlackBST 
 
-    * Queue
+    * Queue 
 
 
 Original Sources: 
 
     RedBlackBST: https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
 
-    Queue:  https://algs4.cs.princeton.edu/43mst/Queue.java.html
+    Queue: Java Utils
 
   Dependencies:
 
