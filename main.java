@@ -32,9 +32,7 @@ public class main {
         Process p65 = new Process(10, 10.0, 10.0, 9, 65);
         Process p49 = new Process(10, 10.0, 10.0, 9, 49);
         Process p98 = new Process(10, 10.0, 10.0, 9, 98);
-        String key = "2";
-        String key_1 = "19";
-        StdOut.println(key.compareTo(key_1));
+
         /*
         List<Integer> anotherList = Arrays.asList(2, 27, 19, 7, 25, 34, 31, 65, 49, 98);
         for (int var : anotherList) {
