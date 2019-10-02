@@ -22,16 +22,16 @@ public class main {
         */
         // get me da el process
         // cada que agregue un elemento debo actualizar el min runtime
-        Process p2 = new Process(10, 10.0, 10.0, 9, 2);
-        Process p27 = new Process(10, 10.0, 10.0, 9, 27);
-        Process p19 = new Process(10, 10.0, 10.0, 9, 19);
-        Process p7 = new Process(10, 10.0, 10.0, 9, 7);
-        Process p25 = new Process(10, 10.0, 10.0, 9, 25);
-        Process p31 = new Process(10, 10.0, 10.0, 9, 31);
-        Process p34 = new Process(10, 10.0, 10.0, 9, 34);
-        Process p65 = new Process(10, 10.0, 10.0, 9, 65);
-        Process p49 = new Process(10, 10.0, 10.0, 9, 49);
-        Process p98 = new Process(10, 10.0, 10.0, 9, 98);
+        Process p2 = new Process("10", 10, 10, 10, 9, 2);
+        Process p27 = new Process("10", 10, 10, 10, 9, 27);
+        Process p19 = new Process("10", 10, 10, 10 ,9, 19);
+        Process p7 = new Process("10", 10, 10, 10 ,9, 7);
+        Process p25 = new Process("10", 10, 10, 10 ,9, 25);
+        Process p31 = new Process("10", 10, 10, 10,9, 31);
+        Process p34 = new Process("10", 10, 10, 10,9, 34);
+        Process p65 = new Process("10", 10, 10, 10,9, 65);
+        Process p49 = new Process("10", 10, 10, 10,9, 49);
+        Process p98 = new Process("10", 10, 10, 10,9, 98);
 
         /*
         List<Integer> anotherList = Arrays.asList(2, 27, 19, 7, 25, 34, 31, 65, 49, 98);
