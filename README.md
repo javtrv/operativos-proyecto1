@@ -1,7 +1,7 @@
 # operativos-proyecto1
 Repositorio dedicado al proyecto 1 de la materia Operativos 2
 
-
+# Generador y Parser de Procesos
 Para crear archivos .json de prueba con la informacion de prueba usamos la pagina: https://next.json-generator.com
 
 Con la siguiente estructura (donde N es el numero de veces que se va a repetir):
