@@ -22,8 +22,8 @@ Con la siguiente estructura (donde N es el numero de veces que se va a repetir):
 
 Para correr el proyecto se deben usar los siguientes comandos:
 
-javac -cp .:json-simple-1.1.1.jar proyecto1.java
-java -cp .:json-simple-1.1.1.jar Planificador <nombre archivo prueba>
+javac -cp .:json-simple-1.1.1.jar main.java
+java -cp .:json-simple-1.1.1.jar main procesos1.json
 
 # Estructuras
 

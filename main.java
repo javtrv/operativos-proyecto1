@@ -22,6 +22,7 @@ public class main {
         */
         // get me da el process
         // cada que agregue un elemento debo actualizar el min runtime
+        // ********************************* PRUEBAS PARA EL ARBOL 
         Process p2 = new Process("10", 10, 10, 10, 9, 2);
         Process p27 = new Process("10", 10, 10, 10, 9, 27);
         Process p19 = new Process("10", 10, 10, 10 ,9, 19);
@@ -51,5 +52,9 @@ public class main {
         StdOut.println(st.keys());
 
         StdOut.println(st.min());
+
+        // LISTA DE PROCESOS NUEVOS
+        ArrayList<Process> procesosNuevos = Parser.ParseToProcess("procesos1.json");
+
     }
 }
