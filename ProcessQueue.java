@@ -26,8 +26,6 @@ public class ProcessQueue implements Iterable<Process>
 }
   public static void main(String[] args) 
   { 
-    
-
     // inicializamos procesos
     ProcessQueue q = new ProcessQueue();
 

@@ -32,7 +32,7 @@
 import java.util.NoSuchElementException;
 import java.util.LinkedList; 
 import java.util.Queue; 
-
+import java.util.ArrayList;
 
 /**
  * The {@code BST} class represents an ordered symbol table of generic key-value
@@ -69,7 +69,7 @@ import java.util.Queue;
  */
 
 
-public class RedBlackBST<Key extends Comparable<Key>, Process> {
+public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     private static final boolean RED = true;
     private static final boolean BLACK = false;
@@ -79,13 +79,13 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
     // BST helper node data type
     private class Node {
         private Key key; // key
-        private Process val; // associated data
+        private Value val; // associated data
         private Node left, right; // links to left and right subtrees
         private boolean color; // color of parent link
         private int size; // subtree count
         
 
-        public Node(Key key, Process val, boolean color, int size) {
+        public Node(Key key, Value val, boolean color, int size) {
             this.key = key;
             this.val = val;
             // El vruntime es la clave
@@ -171,7 +171,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
      *         table and {@code null} if the key is not in the symbol table
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
-    public Process get(Key key) {
+    public Value get(Key key) {
         if (key == null)
             throw new IllegalArgumentException("argument to get() is null");
         return get(root, key);
@@ -179,7 +179,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
 
     // value associated with the given key in subtree rooted at x; null if no such
     // key
-    private Process get(Node x, Key key) {
+    private Value get(Node x, Key key) {
         while (x != null) {
             int cmp = key.compareTo(x.key);
             if (cmp < 0)
@@ -219,7 +219,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
      * @param val the value
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
-    public void put(Key key, Process val) {
+    public void put(Key key, Value val) {
         if (key == null)
             throw new IllegalArgumentException("first argument to put() is null");
         if (val == null) {
@@ -234,17 +234,15 @@ public class RedBlackBST<Key extends Comparable<Key>, Process> {
     }
 
     // insert the key-value pair in the subtree rooted at h
-    private Node put(Node h, Key key, Process val) {
+    private Node put(Node h, Key key, Value val) {
         if (h == null)
             return new Node(key, val, RED, 1);
 
         int cmp = key.compareTo(h.key);
         if (cmp < 0)
             h.left = put(h.left, key, val);
-        else if (cmp > 0)
+        else if (cmp >= 0)
             h.right = put(h.right, key, val);
-        else
-            h.val = val;
 
         // fix-up any right-leaning links
         if (isRed(h.right) && !isRed(h.left))
