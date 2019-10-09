@@ -14,15 +14,10 @@ public class main {
      */
     public static void main(String[] args) {
         RedBlackBST<Integer, Process> st = new RedBlackBST<Integer, Process>();
-        /*
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
-        }
-        */
-        // get me da el process
-        // cada que agregue un elemento debo actualizar el min runtime
-        // ********************************* PRUEBAS PARA EL ARBOL 
+        // **********************Proximo: Agregar Monitores, crear Threads y crear clase Planificador
+        // Tambien: Agregar de la lista de procesos nuevos al arbol
+        
+
         Process p2 = new Process("10", 10, 10, 10, 9, 2);
         Process p27 = new Process("10", 10, 10, 10, 9, 27);
         Process p19 = new Process("10", 10, 10, 10 ,9, 19);
@@ -32,7 +27,7 @@ public class main {
         Process p34 = new Process("10", 10, 10, 10,9, 34);
         Process p65 = new Process("10", 10, 10, 10,9, 65);
         Process p49 = new Process("10", 10, 10, 10,9, 49);
-        Process p98 = new Process("10", 10, 10, 10,9, 98);
+        Process p98 = new Process("10", 10, 10, 10,9, 19);
 
         
         st.put(2, p2);
@@ -45,7 +40,7 @@ public class main {
         st.put(34, p34);
         st.put(65, p65);
         st.put(49, p49);
-        st.put(98, p98);
+        st.put(19, p98);
         
         
         StdOut.print("ESTE ES EL MINIMO: ");
@@ -54,7 +49,12 @@ public class main {
         StdOut.println(st.min());
 
         // LISTA DE PROCESOS NUEVOS
-        ArrayList<Process> procesosNuevos = Parser.ParseToProcess("procesos1.json");
+        //ArrayList<Process> procesosNuevos = Parser.ParseToProcess("procesos1.json");
+
+        // PRUEBAS SCHEDULER
+
+        Scheduler sc = new Scheduler();
+        sc.initScheduler();
 
     }
 }
