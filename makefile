@@ -1,0 +1,27 @@
+JFLAGS = -cp
+JC = javac
+JAR = .:json-simple-1.1.1.jar
+.SUFFIXES: .java .class
+.java.class:
+	$(JC) $(JFLAGS) $(JAR) $*.java
+
+CLASSES = \
+	Parser.java \
+	Planificador.java \
+	Process.java \
+	ProcessQueue.java \
+	RedBlackBST.java \
+	StdIn.java \
+	StdOut.java \
+	main.java
+
+default: classes
+
+classes: $(CLASSES:.java=.class)
+
+clean:
+	$(RM) *.class
+
+run:
+	java -cp .:json-simple-1.1.1.jar main  procesos1.json
+	
