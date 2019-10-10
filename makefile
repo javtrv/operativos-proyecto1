@@ -7,7 +7,7 @@ JAR = .:json-simple-1.1.1.jar
 
 CLASSES = \
 	Parser.java \
-	Planificador.java \
+	Scheduler.java \
 	Process.java \
 	ProcessQueue.java \
 	RedBlackBST.java \
