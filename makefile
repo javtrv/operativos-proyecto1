@@ -23,5 +23,4 @@ clean:
 	$(RM) *.class
 
 run:
-	java -cp .:json-simple-1.1.1.jar main  procesos1.json
-	
+	java -cp $(JAR) main  procesos1.json
