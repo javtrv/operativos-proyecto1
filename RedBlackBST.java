@@ -3,9 +3,9 @@
  *  Original source: https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
  *  Compilation:  javac RedBlackBST.java
  *  Execution:    java RedBlackBST < input.txt
- *  Dependencies: StdIn.java StdOut.java  
- *  Data files:   https://algs4.cs.princeton.edu/33balanced/tinyST.txt  
- *    
+ *  Dependencies: StdIn.java StdOut.java
+ *  Data files:   https://algs4.cs.princeton.edu/33balanced/tinyST.txt
+ *
  *  A symbol table implemented using a left-leaning red-black BST.
  *  This is the 2-3 version.
  *
@@ -14,7 +14,7 @@
  *
  *  % more tinyST.txt
  *  S E A R C H E X A M P L E
- *  
+ *
  *  % java RedBlackBST < tinyST.txt
  *  A 8
  *  C 4
@@ -30,8 +30,8 @@
  ******************************************************************************/
 
 import java.util.NoSuchElementException;
-import java.util.LinkedList; 
-import java.util.Queue; 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.ArrayList;
 
 /**
@@ -83,7 +83,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         private Node left, right; // links to left and right subtrees
         private boolean color; // color of parent link
         private int size; // subtree count
-        
+
 
         public Node(Key key, Value val, boolean color, int size) {
             this.key = key;
@@ -121,7 +121,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the smallest vruntime of the tree
-     * 
+     *
      * @return the smallest vruntime of the tree
      */
 
@@ -142,7 +142,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      }
     /**
      * Returns the number of key-value pairs in this symbol table.
-     * 
+     *
      * @return the number of key-value pairs in this symbol table
      */
     public int size() {
@@ -151,7 +151,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Is this symbol table empty?
-     * 
+     *
      * @return {@code true} if this symbol table is empty and {@code false}
      *         otherwise
      */
@@ -165,7 +165,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the value associated with the given key.
-     * 
+     *
      * @param key the key
      * @return the value associated with the given key if the key is in the symbol
      *         table and {@code null} if the key is not in the symbol table
@@ -195,7 +195,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Does this symbol table contain the given key?
-     * 
+     *
      * @param key the key
      * @return {@code true} if this symbol table contains {@code key} and
      *         {@code false} otherwise
@@ -219,7 +219,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @param val the value
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
-    public void put(Key key, Value val) {
+    synchronized void put(Key key, Value val) {
         if (key == null)
             throw new IllegalArgumentException("first argument to put() is null");
         if (val == null) {
@@ -228,6 +228,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         }
 
         root = put(root, key, val);
+        notify();
         root.color = BLACK;
         //this.min_vruntime = min();
         // assert check();
@@ -262,18 +263,24 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Removes the smallest key and associated value from the symbol table.
-     * 
+     *
      * @throws NoSuchElementException if the symbol table is empty
      */
-    public void deleteMin() {
+    synchronized void deleteMin() {
         if (isEmpty())
-            throw new NoSuchElementException("BST underflow");
+            try {
+                wait();
+            } catch (InterruptedException e){
+                System.out.println("excepcion");
+            }
 
         // if both children of root are black, set root to red
         if (!isRed(root.left) && !isRed(root.right))
             root.color = RED;
 
         root = deleteMin(root);
+        notify();
+
         if (!isEmpty())
             root.color = BLACK;
         // assert check();
@@ -293,7 +300,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Removes the largest key and associated value from the symbol table.
-     * 
+     *
      * @throws NoSuchElementException if the symbol table is empty
      */
     public void deleteMax() {
@@ -467,7 +474,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the height of the BST (for debugging).
-     * 
+     *
      * @return the height of the BST (a 1-node tree has height 0)
      */
     public int height() {
@@ -486,7 +493,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the smallest key in the symbol table.
-     * 
+     *
      * @return the smallest key in the symbol table
      * @throws NoSuchElementException if the symbol table is empty
      */
@@ -496,7 +503,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return min(root).key;
     }
 
-    
+
     // the smallest key in subtree rooted at x; null if no such key
     private Node min(Node x) {
         // assert x != null;
@@ -508,7 +515,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the largest key in the symbol table.
-     * 
+     *
      * @return the largest key in the symbol table
      * @throws NoSuchElementException if the symbol table is empty
      */
@@ -530,7 +537,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     /**
      * Returns the largest key in the symbol table less than or equal to
      * {@code key}.
-     * 
+     *
      * @param key the key
      * @return the largest key in the symbol table less than or equal to {@code key}
      * @throws NoSuchElementException   if there is no such key
@@ -568,7 +575,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     /**
      * Returns the smallest key in the symbol table greater than or equal to
      * {@code key}.
-     * 
+     *
      * @param key the key
      * @return the smallest key in the symbol table greater than or equal to
      *         {@code key}
@@ -636,7 +643,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Return the number of keys in the symbol table strictly less than {@code key}.
-     * 
+     *
      * @param key the key
      * @return the number of keys in the symbol table strictly less than {@code key}
      * @throws IllegalArgumentException if {@code key} is {@code null}
@@ -668,7 +675,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      * Returns all keys in the symbol table as an {@code Iterable}. To iterate over
      * all of the keys in the symbol table named {@code st}, use the foreach
      * notation: {@code for (Key key : st.keys())}.
-     * 
+     *
      * @return all keys in the symbol table as an {@code Iterable}
      */
     public Iterable<Key> keys() {
