@@ -1,12 +1,11 @@
-import java.util.LinkedList; 
-import java.util.Queue; 
 import java.util.Iterator;
-  
+import java.util.concurrent.LinkedBlockingQueue;
+
 public class ProcessQueue implements Iterable<Process>
-{ 
-  private Queue<Process> queue;
+{
+  private LinkedBlockingQueue<Process> queue;
   public ProcessQueue(){
-    this.queue = new LinkedList<Process>();
+    this.queue = new LinkedBlockingQueue<Process>();
   }
 
   public void add(Process p){
@@ -24,8 +23,8 @@ public class ProcessQueue implements Iterable<Process>
   public Iterator<Process> iterator() {
     return this.queue.iterator();
 }
-  public static void main(String[] args) 
-  { 
+  public static void main(String[] args)
+  {
     // inicializamos procesos
     ProcessQueue q = new ProcessQueue();
 
@@ -41,22 +40,22 @@ public class ProcessQueue implements Iterable<Process>
     q.add(proceso3);
     q.add(proceso4);
     q.add(proceso5);
-  
+
     // Enseñamos los elementos de la cola
-    System.out.println("Elementos de la cola-"); 
+    System.out.println("Elementos de la cola-");
 
     for(Process p: q){
         System.out.println(p.get_pid());
       }
-  
-    // Para remover los elementos de la cola. 
-    Process removedele = q.remove(); 
-    System.out.println("removed element-" + removedele.get_pid()); 
-  
-    System.out.println(q); 
-  
 
-    int size = q.size(); 
-    System.out.println("Tamano de la cola-" + size); 
-  } 
-} 
+    // Para remover los elementos de la cola.
+    Process removedele = q.remove();
+    System.out.println("removed element-" + removedele.get_pid());
+
+    System.out.println(q);
+
+
+    int size = q.size();
+    System.out.println("Tamano de la cola-" + size);
+  }
+}
