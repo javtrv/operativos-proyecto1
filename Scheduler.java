@@ -27,32 +27,44 @@ class Scheduler{
     }
 
         // Hilo que simula la ejecucion del proceso en el CPU
-        class CPUSimulator implements Runnable {
+        class CPUSimulator extends Thread {
             // Le debo pasar el timeslice que el proceso va a correr
-    
+            long timeslice;
+            public CPUSimulator(long time){
+                this.timeslice = time;
+            }
+            @Override
             public void run(){
-                StdOut.println(prueba);
-                prueba = 2;
-                StdOut.println(prueba);
+                try{
+                    sleep(this.timeslice);
+                    StdOut.println("Running process");
+                }catch(InterruptedException e){
+                }
             }
         }
     
         // Hilo que simula la ejecucion del IO
-        class IOSimulator implements Runnable {
+        class IOSimulator extends Thread{
             // Le debo pasar el timeslice que el proceso va a pasar en io
-            
+            long timeslice;
+            public IOSimulator(long time){
+                this.timeslice = time;
+            }
+            @Override
             public void run(){
-                StdOut.println(prueba);
-                prueba = 2;
-                StdOut.println(prueba);
+                try{
+                    sleep(this.timeslice);
+                    StdOut.println("Running IO");
+                }catch(InterruptedException e){
+                }
             }
         }
     
         // ***************************************** HILOS QUE INTERACTUAN CON EL RBT *******************************************************
         // Hilo que elimina del arbol al iniciar el scheduler o cuando el quantum de tiemo culmina
-        class ProcessRemove implements Runnable {
+        class ProcessRemove extends Thread{
             // Le debo pasar el timeslice que el proceso va a correr: YA NO NECESITO ESPERAR, SOLO REVISO QUE LA VARIABLE ESTE EN QUE NO PUEDO SACAR
-            
+            @Override
             public void run(){
                 // Si no ha terminado el tiempo de CPU y ademas el cpu esta lleno espero
                 while(true){
@@ -66,9 +78,9 @@ class Scheduler{
         }
     
         // Hilo que "saca" del cpu y agrega en el arbol cuando el quantum de tiempo del proceso termina
-        class ProcessInsert implements Runnable {
+        class ProcessInsert extends Thread {
             // Le debo pasar el timeslice que el proceso va a correr
-            
+            @Override
             public void run(){
                 while(true){
                     if(finishCPUTime){
@@ -85,23 +97,19 @@ class Scheduler{
     
         // Hilo que "saca" del cpu y agrega en la cola cuando hay una interrupcion de IO
         // DEBEMOS DECIDIR CUANDO HACER ESTAS INTERRUPCIONES
-        class BlockingQueueInsert implements Runnable {
+        class BlockingQueueInsert extends Thread {
             // Le debo pasar el timeslice que el proceso va a correr
-            
+            @Override
             public void run(){
-                StdOut.println(prueba);
-                prueba = 2;
-                StdOut.println(prueba);
+
             }
         }
         // Hilo que elimina de la cola de bloqueados e inserta en el arbol
-        class BlockingQueueRemove implements Runnable {
+        class BlockingQueueRemove extends Thread{
             // Le debo pasar el timeslice que el proceso va a correr
-            
+            @Override
             public void run(){
-                StdOut.println(prueba);
-                prueba = 2;
-                StdOut.println(prueba);
+
             }
         }
         // GenerateProcess deberia ser un hilo que genere procesos cada x tiempo
@@ -134,8 +142,8 @@ class Scheduler{
     }
     public void initScheduler() { //Aqui corremos el hilo de iniciar el Scheduler
         
-        CPUSimulator t1 = new CPUSimulator();
-        t1.run();
+        //CPUSimulator t1 = new CPUSimulator();
+        //t1.run();
         initSchedulerThread init = new initSchedulerThread(); 
         init.start();
     }
