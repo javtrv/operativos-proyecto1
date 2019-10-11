@@ -88,7 +88,7 @@ public class Scheduler{
             StdOut.println(prueba);
         }
     }
-
+    // GenerateProcess deberia ser un hilo que genere procesos cada x tiempo
     public void initScheduler() {
         
         // Load Processes to New Processes list
