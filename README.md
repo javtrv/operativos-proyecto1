@@ -35,7 +35,7 @@ Estructuras:
 
     * RedBlackBST 
 
-    * Queue 
+    * BlockingQueue (Thread safe queue) 
 
 
 Original Sources: 
