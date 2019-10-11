@@ -55,9 +55,13 @@ class Scheduler{
             
             public void run(){
                 // Si no ha terminado el tiempo de CPU y ademas el cpu esta lleno espero
-                while(!finishCPUTime && !cpuEmpty){}
-                min = readyTree.min();
-                readyTree.deleteMin();
+                while(true){
+                    if(finishCPUTime || cpuEmpty){
+                        min = readyTree.min();
+                        readyTree.deleteMin();
+                    }
+                }
+
             }
         }
     
@@ -66,7 +70,12 @@ class Scheduler{
             // Le debo pasar el timeslice que el proceso va a correr
             
             public void run(){
-                while(!finishCPUTime){}
+                while(true){
+                    if(finishCPUTime){
+                        // Meto el current en el arbol
+                        // el min ahora es el current
+                    }
+                }
                 // Debo considerar que el tiempo de io sea 0 para agregar en el arbol
                 // Inserto el proceso con el PID de min
                 //readyTree.put(p.get_vruntime(), p);
