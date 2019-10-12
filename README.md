@@ -1,24 +1,7 @@
-# operativos-proyecto1
-Repositorio dedicado al proyecto 1 de la materia Operativos 2
+# Interfaz
 
+Este branch esta dedicado a la implementacion de la GUI del manejador de procesos.
 
-Para crear archivos .json de prueba con la informacion de prueba usamos la pagina: https://next.json-generator.com
+La interfaz se implementa utilizando la herramienta de  **java swing**, la cual nos permite crear interfaces de forma sencilla.
 
-Con la siguiente estructura (donde N es el numero de veces que se va a repetir):
-[
-  {
-    'repeat( N )': {
-      id: '{{objectId()}}',
-      tiempo_llegada: '{{integer(0, 100)}}',
-      tiempo_CPU: '{{integer(0, 100)}}',
-      tiempo_IO: '{{integer(0, 100)}}',
-      prioridad: '{{integer(0, 10)}}'
-
-    }
-  }
-]
-
-Para correr el proyecto se deben usar los siguientes comandos:
-
-javac -cp .:json-simple-1.1.1.jar proyecto1.java
-java -cp .:json-simple-1.1.1.jar Planificador <nombre archivo prueba>
+De momento la interfaz solo presenta la diagramacion de como los datos seran presentados, luego se implementara la sincronizacion de la interfaz con los datos que el sistema arroje.
