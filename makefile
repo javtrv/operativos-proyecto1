@@ -7,6 +7,7 @@ JAR = .:json-simple-1.1.1.jar
 
 CLASSES = \
 	Parser.java \
+	RedBlackTree.java \
 	Scheduler.java \
 	Process.java \
 	ProcessQueue.java \
@@ -24,3 +25,6 @@ clean:
 
 run:
 	java -cp $(JAR) main  procesos1.json
+
+test:
+	java RedBlackTree
