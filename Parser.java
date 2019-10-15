@@ -28,6 +28,9 @@ class Parser
               );
             System.out.println("Lista de procesos nuevos");
             System.out.println(procesosNuevos);
+            for (Process var : procesosNuevos) {
+              System.out.println(var.get_pid());
+            }
             
 
         } catch (FileNotFoundException e) {

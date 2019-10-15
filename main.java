@@ -30,16 +30,16 @@ public class main {
         Process p98 = new Process("10", 10, 10, 10,9, 19);
 
         
-        st.put(2, p2);
+        st.put(27, p2);
         
-        st.put(27, p27);
+        st.put(19, p27);
         st.put(19, p19);
-        st.put(7, p7);
-        st.put(25, p25);
-        st.put(31, p31);
-        st.put(34, p34);
-        st.put(65, p65);
-        st.put(49, p49);
+        st.put(19, p7);
+        st.put(19, p25);
+        st.put(19, p31);
+        st.put(19, p34);
+        st.put(19, p65);
+        st.put(19, p49);
         st.put(19, p98);
         
         
@@ -54,7 +54,7 @@ public class main {
         // PRUEBAS SCHEDULER
 
         Scheduler sc = new Scheduler();
-        sc.initScheduler();
+        sc.executeScheduler();
 
     }
 }

@@ -1,26 +1,41 @@
 [
   {
-    "id": "5d940b43e7cf319cb7f93795",
-    "tiempo_llegada": 44,
-    "tiempo_CPU": 27,
-    "tiempo_IO": 35,
-    "prioridad": 0,
-    "v_runtime": 9
-  },
-  {
-    "id": "5d940b430d8a0427922984b1",
-    "tiempo_llegada": 84,
-    "tiempo_CPU": 49,
-    "tiempo_IO": 35,
+    "id": "P1",
+    "tiempo_llegada": 16,
+    "tiempo_CPU": 88,
+    "tiempo_IO": 1000,
     "prioridad": 2,
-    "v_runtime": 8
+    "v_runtime": 15000
   },
   {
-    "id": "5d940b437a3c33ea2c4254bf",
-    "tiempo_llegada": 15,
-    "tiempo_CPU": 53,
-    "tiempo_IO": 1,
-    "prioridad": 7,
-    "v_runtime": 5
-  }
-]
+    "id": "P2",
+    "tiempo_llegada": 99,
+    "tiempo_CPU": 90,
+    "tiempo_IO": 1000,
+    "prioridad": 2,
+    "v_runtime": 1000
+  },
+  {
+    "id": "P3",
+    "tiempo_llegada": 55,
+    "tiempo_CPU": 4,
+    "tiempo_IO": 1000,
+    "prioridad": 5,
+    "v_runtime": 1000
+  },
+  {
+    "id": "P4",
+    "tiempo_llegada": 49,
+    "tiempo_CPU": 21,
+    "tiempo_IO": 1000,
+    "prioridad": 10,
+    "v_runtime": 1000
+  },
+  {
+    "id": "P5",
+    "tiempo_llegada": 75,
+    "tiempo_CPU": 81,
+    "tiempo_IO": 1000,
+    "prioridad": 3,
+    "v_runtime": 1000
+  }]

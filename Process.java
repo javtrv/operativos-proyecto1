@@ -24,6 +24,13 @@ public class Process {
         return pid;
     }
 
+    public void update_vruntime(int time){
+        this.vRuntime = this.vRuntime - time;
+    }
+
+    public void update_iotime(int time){
+        this.tiempoIO = this.tiempoIO - time;
+    }
 
     public int get_tiempo_llegada(){
         return tiempoLlegada;
