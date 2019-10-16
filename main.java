@@ -36,17 +36,21 @@ public class main {
        map.put(p2.get_pid(), p2);
        map.put(p27.get_pid(), p27);
 
-       // changing key state so that
-       // hashcode() should be calculated again
+
        p2.update_vruntime(1);
        p27.update_vruntime(1);
        System.out.println(map.get("10"));
 
-       // still prints Geeks1
-
+       // tiempo IO mayor a 0
        for (Process i : map.values()) {
-        System.out.println(i);
+        System.out.println(i.get_tiempo_io()>0);
       }
+
+
+      // tiempo CPU mayor a 0
+      for (Process i : map.values()) {
+       System.out.println(i.get_tiempo_cpu()>0);
+     }
        System.out.println(map);
 
         // st.put(27, p2);
