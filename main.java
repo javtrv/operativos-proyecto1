@@ -39,18 +39,31 @@ public class main {
 
        p2.update_vruntime(1);
        p27.update_vruntime(1);
+
        System.out.println(map.get("10"));
 
        // tiempo IO mayor a 0
        for (Process i : map.values()) {
         System.out.println(i.get_tiempo_io()>0);
       }
+      p2.update_iotime(1000);
+      p27.update_iotime(1000);
+
+      for (Process i : map.values()) {
+       System.out.println(i.get_tiempo_io()>0);
+     }
+
 
 
       // tiempo CPU mayor a 0
       for (Process i : map.values()) {
        System.out.println(i.get_tiempo_cpu()>0);
      }
+
+     // tiempo v_runtime
+     for (Process i : map.values()) {
+      System.out.println(i.get_vruntime());
+    }
        System.out.println(map);
 
         // st.put(27, p2);
