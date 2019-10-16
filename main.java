@@ -89,8 +89,8 @@ public class main {
         //
         // // PRUEBAS SCHEDULER
         //
-        // Scheduler sc = new Scheduler();
-        // sc.executeScheduler();
+        Scheduler sc = new Scheduler();
+        sc.executeScheduler();
 
     }
 }
