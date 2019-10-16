@@ -1,0 +1,96 @@
+java -cp .:json-simple-1.1.1.jar main  procesos1.json
+Process@7440e464
+true
+true
+false
+false
+true
+true
+26
+1
+{11=Process@49476842, 10=Process@7440e464}
+cpu epmty
+Lista de procesos nuevos
+[Process@7376651f, Process@d176619, Process@205e6cd, Process@54149c08, Process@140a4508]
+P1
+P2
+P3
+P4
+P5
+Process added to tree from new list: 
+P1
+Arbol de listos: R----15000(BLACK)
+Process added to tree from new list: 
+P2
+Arbol de listos: R----15000(BLACK)
+     L----1000(RED)
+Process added to tree from new list: 
+P3
+Arbol de listos: R----1000(BLACK)
+     L----1000(RED)
+     R----15000(RED)
+Process added to tree from new list: 
+P4
+Arbol de listos: R----1000(BLACK)
+     L----1000(BLACK)
+     R----15000(BLACK)
+          L----1000(RED)
+Process deleted from tree: P2
+Process added to tree from new list: 
+P5
+Arbol de listos: R----1000(BLACK)
+     L----1000(BLACK)
+     R----15000(BLACK)
+          L----1000(RED)
+Outside initSsched
+R----1000(BLACK)
+     L----1000(BLACK)
+     R----15000(BLACK)
+          L----1000(RED)
+Timeslice: 1000
+Running process in CPU: P2
+Termino de correr en el cpu: P2
+IO EMPTY PROCESS DELETED FROM BLOCK QUEUE: P2 WITH TIMESLICE: 1000
+IO SIM con: P2
+PROCESS ADDED TO BLOCK QUEUE: P2Con tiempo IO: 1000
+Finish CPU time
+Vruntime antes de correr: 1000de P2
+Vruntime updated: 0de P2
+IO TIME UPDATED DE : P2 0
+Before min
+Process deleted from tree: P3
+PROCESS DELETED FROM BLOCK QUEUE: P3 WITH TIMESLICE: 1000
+Running process in CPU: P3
+PROCESS ADDED TO BLOCK QUEUE: P3Con tiempo IO: 1000
+Termino de correr en el cpu: P3
+IO SIM con: P3
+Finish CPU time
+Vruntime antes de correr: 1000de P3
+Vruntime updated: 0de P3
+Before min
+Process deleted from tree: P4
+Running process in CPU: P4
+IO TIME UPDATED DE : P3 0
+Termino de correr en el cpu: P4
+PROCESS ADDED TO BLOCK QUEUE: P4Con tiempo IO: 1000
+Finish CPU time
+Vruntime antes de correr: 1000de P4
+Vruntime updated: 0de P4
+Before min
+Process deleted from tree: P5
+Running process in CPU: P5
+PROCESS DELETED FROM BLOCK QUEUE: P4 WITH TIMESLICE: 1000
+PROCESS ADDED TO BLOCK QUEUE: P5Con tiempo IO: 1000
+IO SIM con: P4
+Termino de correr en el cpu: P5
+IO TIME UPDATED DE : P4 0
+PROCESS DELETED FROM BLOCK QUEUE: P5 WITH TIMESLICE: 1000
+IO SIM con: P5
+Finish CPU time
+Vruntime antes de correr: 1000de P5
+Vruntime updated: 0de P5
+Before min
+Process deleted from tree: P1
+Im not running (cpu)Im not running (IO)IO TIME UPDATED DE : P5 0
+Im not running (handler)Im not running BlockingQueueIN
+makefile:27: recipe for target 'run' failed

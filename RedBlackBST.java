@@ -93,6 +93,10 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             this.color = color;
             this.size = size;
         }
+
+        public Value getProcess(Node x){
+            return x.val;
+        }
     }
 
     /**
@@ -226,7 +230,6 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             delete(key);
             return;
         }
-
         root = put(root, key, val);
         notify();
         root.color = BLACK;
@@ -491,15 +494,29 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      * Ordered symbol table methods.
      ***************************************************************************/
 
+
+    public Node getMin(){
+        if (isEmpty())
+        throw new NoSuchElementException("calls min() with empty symbol table");
+
+        return min(root);
+    }
     /**
      * Returns the smallest key in the symbol table.
      *
      * @return the smallest key in the symbol table
      * @throws NoSuchElementException if the symbol table is empty
      */
-    public Key min() {
+    synchronized Key min() {
+        //StdOut.print("Inside min!");
+                    
         if (isEmpty())
-            throw new NoSuchElementException("calls min() with empty symbol table");
+            try {
+                wait();
+            } catch (InterruptedException e){
+                System.out.println("excepcion");
+            }
+        notify();
         return min(root).key;
     }
 

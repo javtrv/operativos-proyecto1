@@ -29,6 +29,9 @@ class Scheduler{
     private volatile boolean noMoreProcess;
     private volatile boolean addedToBQ;
     private volatile HashMap<String, Process> processTable;
+    private volatile boolean currentCPU_Updated;
+    private volatile boolean currentIO_Updated;
+
     
     
     
@@ -50,6 +53,9 @@ class Scheduler{
         this.currentExamined = false;
         this.addedToBQ = false;
         this.processTable = new HashMap<>();
+        this.currentCPU_Updated = false;
+        this.currentIO_Updated = false;
+
         
         
     }
@@ -192,20 +198,24 @@ class Scheduler{
                         
                         writeToScreen("Finish CPU time");
 
+                        if(!currentCPU_Updated){
 
-                        writeToScreen("Vruntime antes de correr: " + Integer.toString(currentProcess.get_vruntime())+ "de " + currentProcess.get_pid());
+                            writeToScreen("Vruntime antes de correr: " + Integer.toString(currentProcess.get_vruntime())+ "de " + currentProcess.get_pid());
 
-                        currentProcess.update_vruntime(CPUtimeslice);
+                            currentProcess.update_vruntime(CPUtimeslice);
+    
+                            writeToScreen("Vruntime updated: " + Integer.toString(currentProcess.get_vruntime()) + "de " + currentProcess.get_pid());
+    
+                            if(!addedToBQ && currentProcess.get_vruntime() > 0)
+                            {
+                                readyTree.insert(currentProcess.get_vruntime(),currentProcess);
+                                writeToScreen("Process added to tree: " + currentProcess.get_pid());
+    
+                            }
+                            writeToScreen("Before min");
 
-                        writeToScreen("Vruntime updated: " + Integer.toString(currentProcess.get_vruntime()) + "de " + currentProcess.get_pid());
-
-                        if(!addedToBQ && currentProcess.get_vruntime() > 0)
-                        {
-                            readyTree.insert(currentProcess.get_vruntime(),currentProcess);
-                            writeToScreen("Process added to tree: " + currentProcess.get_pid());
-
+                            currentCPU_Updated = true;
                         }
-                        writeToScreen("Before min");
 
                         // Verifico si aun hay procesos para correr y no me voy a quedar esperando por siempre
 
@@ -226,6 +236,10 @@ class Scheduler{
                             CPUtimeslice = currentProcess.get_vruntime();
         
                             currentExamined = false;
+
+                            currentCPU_Updated = false;
+
+                            finishCPUTime = false;
     
                             minSet = true;
                         }
@@ -306,39 +320,50 @@ class Scheduler{
 
                 }else if(finishIOTime){
 
-                    currentIOProcess.update_iotime(IOtimeslice);
+                    if(currentIO_Updated){
 
-                    writeToScreen("IO TIME UPDATED DE : " + currentIOProcess.get_pid() + " " + Integer.toString(currentIOProcess.get_tiempo_io()));
+                        currentIOProcess.update_iotime(IOtimeslice);
 
-
-                    if(currentIOProcess.get_vruntime() > 0){
-
-                        readyTree.insert(currentIOProcess.get_vruntime(),currentIOProcess);
-
-                        writeToScreen("PROCESS INSERTED TO TREE FROM BQ: " + currentIOProcess.get_pid() + " with vruntime: " + currentIOProcess.get_vruntime());
-                    }
-
-                    // Verifico que haya procesos con tiempo de IO
-                
-                    Process p = new Process("0",0,0,0,0,0);
-
-                    try
-                    {
-                        p = blockQueue.take();
-                    }
-                    catch(InterruptedException e){
+                        writeToScreen("IO TIME UPDATED DE : " + currentIOProcess.get_pid() + " " + Integer.toString(currentIOProcess.get_tiempo_io()));
     
+    
+                        if(currentIOProcess.get_vruntime() > 0){
+    
+                            readyTree.insert(currentIOProcess.get_vruntime(),currentIOProcess);
+    
+                            writeToScreen("PROCESS INSERTED TO TREE FROM BQ: " + currentIOProcess.get_pid() + " with vruntime: " + currentIOProcess.get_vruntime());
+                        }
+    
+                        // Verifico que haya procesos con tiempo de IO
+                        currentIO_Updated = true;
                     }
 
-                    IOtimeslice = p.get_tiempo_io();
+                    if(processHaveIO()){
 
-                    currentIOProcess = p;
+                        Process p = new Process("0",0,0,0,0,0);
 
-                    writeToScreen("PROCESS DELETED FROM BLOCK QUEUE: " + currentIOProcess.get_pid() + " WITH TIMESLICE: " + Integer.toString(IOtimeslice));
+                        try
+                        {
+                            p = blockQueue.take();
+                        }
+                        catch(InterruptedException e){
+        
+                        }
+    
+                        IOtimeslice = p.get_tiempo_io();
+    
+                        currentIOProcess = p;
+    
+                        writeToScreen("PROCESS DELETED FROM BLOCK QUEUE: " + currentIOProcess.get_pid() + " WITH TIMESLICE: " + Integer.toString(IOtimeslice));
+    
+                        finishIOTime = false;
 
-                    ioSet = true;
+                        currentIO_Updated = false;
+    
+                        ioSet = true;
+                    }
 
-                    finishIOTime = false;
+
                     
 
                 }
