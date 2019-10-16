@@ -2,7 +2,7 @@
 // Author: Algorithm Tutor
 // Tutorial URL: https://algorithmtutor.com/Data-Structures/Tree/Red-Black-Trees/
 // CORMEN
-
+import java.util.ArrayList; 
 // data structure that represents a node in the tree
 class Node {
 	int data; // holds the key
@@ -18,6 +18,7 @@ class Node {
 public class RedBlackTree {
 	private Node root;
 	private Node TNULL;
+	private ArrayList<String> treeToString;
 
 	public RedBlackTree() {
 		TNULL = new Node();
@@ -25,8 +26,12 @@ public class RedBlackTree {
 		TNULL.left = null;
 		TNULL.right = null;
 		root = TNULL;
+		treeToString = new ArrayList<String>();
 	}
 
+	private ArrayList<String> getString(){
+		return treeToString;
+	}
 	private void preOrderHelper(Node node) {
 		if (node != TNULL) {
 			System.out.print(node.data + " ");
@@ -272,18 +277,24 @@ public class RedBlackTree {
 
 	private void printHelper(Node root, String indent, boolean last) {
 		// print the tree structure on the screen
+		String string = "";
 	   	if (root != TNULL) {
+			string = string + indent;
 		   System.out.print(indent);
 		   if (last) {
+			  string = string + "R----" + indent;
 		      System.out.print("R----");
 		      indent += "     ";
 		   } else {
+			  string = string + "L----" + indent;
 		      System.out.print("L----");
 		      indent += "|    ";
 		   }
             
            String sColor = root.color == 1?"RED":"BLACK";
 		   System.out.println(root.data + "(" + sColor + ")");
+		   string = string + root.data + "(" + sColor + ")";
+		   treeToString.add(string);
 		   printHelper(root.left, indent, false);
 		   printHelper(root.right, indent, true);
 		}
@@ -539,7 +550,7 @@ public class RedBlackTree {
 		return root == TNULL;
 	}
 	// print the tree structure on the screen
-	public void prettyPrint() {
+	synchronized void prettyPrint() {
         printHelper(this.root, "", true);
 	}
 	
@@ -569,8 +580,9 @@ public class RedBlackTree {
 		
 		Node n = bst.min();
 		System.out.println(n.process.get_pid());
-		
 		bst.prettyPrint();
+		ArrayList<String> tree = bst.getString();
+		System.out.println(tree);
 		bst.deleteMin();
 		bst.prettyPrint();
 	}

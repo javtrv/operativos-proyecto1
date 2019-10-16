@@ -14,6 +14,7 @@ CLASSES = \
 	RedBlackBST.java \
 	StdIn.java \
 	StdOut.java \
+	schedulerInterface.java \
 	main.java
 
 default: classes
@@ -28,3 +29,6 @@ run:
 
 test:
 	java RedBlackTree
+
+interface:
+	java schedulerInterface
