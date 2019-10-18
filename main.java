@@ -15,7 +15,6 @@ public class main {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        RedBlackBST<Integer, Process> st = new RedBlackBST<Integer, Process>();
         HashMap<String, Process> map = new HashMap<>();
         // **********************Proximo: Agregar Monitores, crear Threads y crear clase Planificador
         // Tambien: Agregar de la lista de procesos nuevos al arbol

@@ -10,10 +10,6 @@ CLASSES = \
 	RedBlackTree.java \
 	Scheduler.java \
 	Process.java \
-	ProcessQueue.java \
-	RedBlackBST.java \
-	StdIn.java \
-	StdOut.java \
 	main.java
 
 default: classes
