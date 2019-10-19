@@ -10,9 +10,10 @@ import org.json.simple.parser.ParseException;
 
 class Parser
 {
+
   @SuppressWarnings("unchecked")
   private static ArrayList<Process> procesosNuevos = new ArrayList<Process>();
-
+  Integer contador_procesos;
   public static ArrayList<Process> ParseToProcess(String file) 
   {
     //Planificador planificador = new Planificador();
@@ -21,7 +22,7 @@ class Parser
     try (FileReader reader = new FileReader(file))
     {
       //Read JSON file
-
+            System.out.println(reader);
             Object obj = jsonParser.parse(reader);
             JSONArray listaProcesos = (JSONArray) obj;
             listaProcesos.forEach( proc ->  parseProcessObject( (JSONObject) proc ) 
@@ -45,12 +46,19 @@ class Parser
 
   private static void parseProcessObject(JSONObject proc) 
   {
-
-    String id = (String) proc.get("id"); 
+    contador_procesos++;
+    Integer aux;
+    String id = "P" + contador_procesos;
     Integer tiempoLlegada = (int) (long) proc.get("tiempo_llegada");
     Integer tiempoCPU = (int) (long) proc.get("tiempo_CPU");
     Integer tiempoIO = (int) (long) proc.get("tiempo_IO");
     Integer prioridad = (int) (long) proc.get("prioridad");
+    if (tiempoIO > tiempoCPU) {
+      aux = tiempoIO;
+      tiempoIO = tiempoCPU;
+      tiempoCPU = tiempoIO;
+    }
+
     //Integer vRuntime = (int) (long) proc.get("v_runtime");
     Process p = new Process(id, tiempoLlegada, tiempoIO, tiempoCPU, prioridad);
     procesosNuevos.add(p);
