@@ -1,6 +1,8 @@
 /**
  * Process
  */
+import java.util.*; 
+
 public class Process {
 
     private String pid;
@@ -8,49 +10,65 @@ public class Process {
     private int tiempoCPU;
     private int tiempoIO;
     private int prioridad;
-    private int vRuntime;
+    private int execTime;
+    private SchedEntity schedEntity;
 
 
-    public Process(String pid_, int tiempo_llegada_, int tiempo_io_, int tiempo_cpu_, int prioridad_, int vRuntime){
+    public Process(String pid_, int tiempo_llegada_, int tiempo_io_, int tiempo_cpu_, int prioridad_){
         this.pid = pid_;
         this.tiempoLlegada = tiempo_llegada_;
-        this.tiempoIO = tiempo_io_;
-        this.tiempoCPU = tiempo_cpu_;
+        this.tiempoIO = tiempo_io_; // Veces que pasa por IO
+        this.tiempoCPU = tiempo_cpu_; // Veces que pasa por el CPU
         this.prioridad = prioridad_;
-        this.vRuntime = vRuntime;
+        this.execTime = 0;
+        this.schedEntity = null;
+    }
+
+    public SchedEntity createSchedEntity(int weight){
+        this.schedEntity = new SchedEntity(this.pid, 0, weight);
+        return this.schedEntity;
+    }
+
+    public SchedEntity get_schedEntity(){
+        return this.schedEntity;
     }
 
     public String get_pid(){
         return pid;
     }
 
-    public void update_vruntime(int time){
-        this.vRuntime = this.vRuntime - time;
+    public void update_iotime(){
+        this.tiempoIO = this.tiempoIO - 1;
     }
 
-    public void update_iotime(int time){
-        this.tiempoIO = this.tiempoIO - time;
+    public void update_cputime(){
+        this.tiempoCPU = this.tiempoCPU - 1;
+    }
+
+    public void update_execTime(int time){
+        this.execTime = execTime + time;
     }
 
     public int get_tiempo_llegada(){
-        return tiempoLlegada;
+        return this.tiempoLlegada;
     }
 
 
     public int get_tiempo_cpu(){
-        return tiempoCPU;
+        return this.tiempoCPU;
     }
 
 
     public int get_prioridad(){
-        return prioridad;
+        return this.prioridad;
     }
 
-    public int get_vruntime(){
-        return vRuntime;
-    }
 
     public int get_tiempo_io(){
-        return tiempoIO;
+        return this.tiempoIO;
+    }
+
+    public int get_execTime(){
+        return this.execTime;
     }
 }

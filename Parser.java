@@ -51,8 +51,8 @@ class Parser
     Integer tiempoCPU = (int) (long) proc.get("tiempo_CPU");
     Integer tiempoIO = (int) (long) proc.get("tiempo_IO");
     Integer prioridad = (int) (long) proc.get("prioridad");
-    Integer vRuntime = (int) (long) proc.get("v_runtime");
-    Process p = new Process(id, tiempoLlegada, tiempoIO, tiempoCPU, prioridad, vRuntime);
+    //Integer vRuntime = (int) (long) proc.get("v_runtime");
+    Process p = new Process(id, tiempoLlegada, tiempoIO, tiempoCPU, prioridad);
     procesosNuevos.add(p);
 
   }

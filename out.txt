@@ -35,6 +35,7 @@ Arbol de listos: R----1000(BLACK)
      L----1000(BLACK)
      R----15000(BLACK)
           L----1000(RED)
+Process deleted from tree: P2
 Process added to tree from new list: 
 P5
 Arbol de listos: R----1000(BLACK)
@@ -46,121 +47,85 @@ R----1000(BLACK)
      L----1000(BLACK)
      R----15000(BLACK)
           L----1000(RED)
-Process deleted from tree: P2
 Timeslice: 1000
 Running process in CPU: P2
 Termino de correr en el cpu: P2
 Vruntime antes de correr: 1000de P2
 Vruntime updated: 0de P2
 PROCESS ADDED TO BLOCK QUEUE: P2Con tiempo IO: 1000
+IO EMPTY PROCESS DELETED FROM BLOCK QUEUE: P2 WITH TIMESLICE: 1000
+IO SIM con: P2 WITH TIMESLICE : 1000
 Finish CPU time
 Value of tree: false
 Value of queue: true
-IO EMPTY PROCESS DELETED FROM BLOCK QUEUE: P2 WITH TIMESLICE: 1000
-IO SIM con: P2 WITH TIMESLICE : 1000
 Process deleted from tree: P3
-Running process in CPU: P3
 Finish IO time
+Running process in CPU: P3
+IO TIME UPDATED DE : P2 0
 Termino de correr en el cpu: P3
+Me quede aqui
 Vruntime antes de correr: 1000de P3
 Vruntime updated: 0de P3
-IO TIME UPDATED DE : P2 0
+Sali de aqui
+PROCESS DELETED FROM BLOCK QUEUE: P3 WITH TIMESLICE: 1000
 PROCESS ADDED TO BLOCK QUEUE: P3Con tiempo IO: 1000
+IO SIM con: P3 WITH TIMESLICE : 1000
 Finish CPU time
 Value of tree: false
-Value of queue: false
-In block queue: P3
+Value of queue: true
 Process deleted from tree: P4
+Finish IO time
 Running process in CPU: P4
-Me quede aqui
+IO TIME UPDATED DE : P3 0
 Termino de correr en el cpu: P4
+Me quede aqui
 Vruntime antes de correr: 1000de P4
 Vruntime updated: 0de P4
+Sali de aqui
+PROCESS DELETED FROM BLOCK QUEUE: P4 WITH TIMESLICE: 1000
+IO SIM con: P4 WITH TIMESLICE : 1000
 PROCESS ADDED TO BLOCK QUEUE: P4Con tiempo IO: 1000
 Finish CPU time
 Value of tree: false
-Value of queue: false
-Sali de aqui
-In block queue: P4
+Value of queue: true
 Process deleted from tree: P5
+Finish IO time
 Running process in CPU: P5
-PROCESS DELETED FROM BLOCK QUEUE: P3 WITH TIMESLICE: 1000
+IO TIME UPDATED DE : P4 0
 Termino de correr en el cpu: P5
+Me quede aqui
 Vruntime antes de correr: 1000de P5
 Vruntime updated: 0de P5
-IO SIM con: P3 WITH TIMESLICE : 1000
 PROCESS ADDED TO BLOCK QUEUE: P5Con tiempo IO: 1000
-Finish CPU time
-Value of tree: false
-Value of queue: false
-Finish IO time
-IO TIME UPDATED DE : P3 0
-In block queue: P4
-In block queue: P5
-Me quede aqui
-Sali de aqui
-PROCESS DELETED FROM BLOCK QUEUE: P4 WITH TIMESLICE: 1000
-Process deleted from tree: P1
-IO SIM con: P4 WITH TIMESLICE : 1000
-Running process in CPU: P1
-Finish IO time
-IO TIME UPDATED DE : P4 0
-Me quede aqui
 Sali de aqui
 PROCESS DELETED FROM BLOCK QUEUE: P5 WITH TIMESLICE: 1000
+IO SIM con: P5 WITH TIMESLICE : 1000
+Finish CPU time
+Value of tree: false
+Finish IO time
+IO TIME UPDATED DE : P5 0
+Value of queue: true
+Process deleted from tree: P1
+Running process in CPU: P1
+Me quede aqui
 Termino de correr en el cpu: P1
 Vruntime antes de correr: 15000de P1
 Vruntime updated: 0de P1
-IO SIM con: P5 WITH TIMESLICE : 1000
-PROCESS ADDED TO BLOCK QUEUE: P1Con tiempo IO: 1000
-Finish CPU time
-Value of tree: true
-Value of queue: false
-In block queue: P1
-Finish CPU time
-Value of tree: true
-Value of queue: false
-In block queue: P1
-Finish IO time
-Finish CPU time
-Value of tree: true
-Value of queue: false
-IO TIME UPDATED DE : P5 0
-In block queue: P1
-Finish CPU time
-Value of tree: true
-Value of queue: false
-In block queue: P1
-Finish CPU time
-Value of tree: true
-Value of queue: false
-In block queue: P1
-Finish CPU time
-Value of tree: true
-Value of queue: false
-In block queue: P1
-Finish CPU time
-Value of tree: true
-Value of queue: false
-Me quede aqui
 Sali de aqui
 PROCESS DELETED FROM BLOCK QUEUE: P1 WITH TIMESLICE: 1000
 IO SIM con: P1 WITH TIMESLICE : 1000
-In block queue: P1
-Finish CPU time
-Value of tree: true
-Value of queue: true
-Finish CPU time
-Value of tree: true
-Value of queue: true
+PROCESS ADDED TO BLOCK QUEUE: P1Con tiempo IO: 1000
 Finish IO time
-IO TIME UPDATED DE : P1 0
+Finish CPU time
 Im not running (cpu)
-Im not running ProcessUpdaterBQ
-Im not running ProcessProducerBQ
-Im not running ProcessProducerCPU
 Im not running (IO)
-Im not running ProcessUpdaterCPU
-Im not running ProcessConsumerCPU
+Im not running ProcessProducerCPU
 Im not running ProcessProducerTree_fromBQ
 Im not running ProcessConsumerBQ
+Im not running ProcessProducerBQ
+Im not running ProcessUpdaterCPU
+IO TIME UPDATED DE : P1 0
+Value of tree: true
+Im not running ProcessUpdaterBQ
+Value of queue: true
+Im not running ProcessConsumerCPU

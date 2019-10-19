@@ -10,6 +10,7 @@ CLASSES = \
 	RedBlackTree.java \
 	Scheduler.java \
 	Process.java \
+	SchedEntity.java \
 	main.java
 
 default: classes

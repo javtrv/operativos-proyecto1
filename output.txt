@@ -1,134 +1,125 @@
 java -cp .:json-simple-1.1.1.jar main  procesos1.json
-Process@2f0e140b
-true
-true
-false
-false
-true
-true
-26
-1
-{11=Process@7440e464, 10=Process@2f0e140b}
+Weights filled
 Lista de procesos nuevos
-[Process@1218025c, Process@816f27d, Process@87aac27, Process@3e3abc88, Process@6ce253f1]
+[Process@1fb3ebeb, Process@548c4f57]
 P1
 P2
-P3
-P4
-P5
 cpu epmty
+IO EMPTY
 Process added to tree from new list: 
 P1
-Arbol de listos: R----15000(BLACK)
+Arbol de listos: R----0(BLACK)
+Process deleted from tree: P1
+Timeslice: 1000
+Running process in CPU: P1
 Process added to tree from new list: 
 P2
-Arbol de listos: R----15000(BLACK)
-     L----1000(RED)
-Process added to tree from new list: 
-P3
-Arbol de listos: R----1000(BLACK)
-     L----1000(RED)
-     R----15000(RED)
-Process added to tree from new list: 
-P4
-Arbol de listos: R----1000(BLACK)
-     L----1000(BLACK)
-     R----15000(BLACK)
-          L----1000(RED)
-Process added to tree from new list: 
-P5
-Arbol de listos: R----1000(BLACK)
-     L----1000(BLACK)
-     R----15000(BLACK)
-          L----1000(RED)
+Arbol de listos: R----0(BLACK)
 Outside initSsched
-R----1000(BLACK)
-     L----1000(BLACK)
-     R----15000(BLACK)
-          L----1000(RED)
+R----0(BLACK)
+Termino de correr en el cpu: P1
+CPU time updated: 4
+Exec time: 1000
+Vruntime updated: 1000de P1
+IO EMPTY PROCESS DELETED FROM BLOCK QUEUE: P1 WITH TIMESLICE: 2
+IO SIM con: P1 WITH TIMESLICE : 2
+PROCESS ADDED TO BLOCK QUEUE: P1Con tiempo IO: 2
 Process deleted from tree: P2
-Timeslice: 1000
 Running process in CPU: P2
+Finish IO time
+IO TIME UPDATED DE : P1 1
+PROCESS INSERTED TO TREE FROM BQ: P1 with vruntime: 1000
+FINISH IO TIME AND UP AND CAN CHANGE
+Me quede aqui
 Termino de correr en el cpu: P2
-Vruntime antes de correr: 1000de P2
-Vruntime updated: 0de P2
-IO EMPTY PROCESS DELETED FROM BLOCK QUEUE: P2 WITH TIMESLICE: 1000
-PROCESS ADDED TO BLOCK QUEUE: P2Con tiempo IO: 1000
-IO SIM con: P2 WITH TIMESLICE : 1000
-Finish CPU time
-Finish IO time
-IO TIME UPDATED DE : P2 0
-Value of tree: false
-Value of queue: true
-Me quede aqui
-Process deleted from tree: P3
-Running process in CPU: P3
-Termino de correr en el cpu: P3
-Vruntime antes de correr: 1000de P3
-Vruntime updated: 0de P3
+CPU time updated: 3
+Exec time: 1000
+Vruntime updated: 1000de P2
 Sali de aqui
-PROCESS DELETED FROM BLOCK QUEUE: P3 WITH TIMESLICE: 1000
-IO SIM con: P3 WITH TIMESLICE : 1000
-PROCESS ADDED TO BLOCK QUEUE: P3Con tiempo IO: 1000
-Finish CPU time
-Value of tree: false
-Value of queue: true
-Finish IO time
-Process deleted from tree: P4
-Running process in CPU: P4
-IO TIME UPDATED DE : P3 0
-Me quede aqui
-Termino de correr en el cpu: P4
-Vruntime antes de correr: 1000de P4
-Vruntime updated: 0de P4
-Sali de aqui
-PROCESS DELETED FROM BLOCK QUEUE: P4 WITH TIMESLICE: 1000
-IO SIM con: P4 WITH TIMESLICE : 1000
-PROCESS ADDED TO BLOCK QUEUE: P4Con tiempo IO: 1000
-Finish IO time
-IO TIME UPDATED DE : P4 0
-Finish CPU time
-Value of tree: false
-Value of queue: true
-Process deleted from tree: P5
-Running process in CPU: P5
-Me quede aqui
-Termino de correr en el cpu: P5
-Vruntime antes de correr: 1000de P5
-Vruntime updated: 0de P5
-PROCESS ADDED TO BLOCK QUEUE: P5Con tiempo IO: 1000
-Sali de aqui
-PROCESS DELETED FROM BLOCK QUEUE: P5 WITH TIMESLICE: 1000
-Finish CPU time
-Value of tree: false
-Value of queue: true
+PROCESS DELETED FROM BLOCK QUEUE: P2 WITH IOTIME: 3
+IO SIM con: P2 WITH TIMESLICE : 3
+PROCESS ADDED TO BLOCK QUEUE: P2Con tiempo IO: 3
 Process deleted from tree: P1
-IO SIM con: P5 WITH TIMESLICE : 1000
 Running process in CPU: P1
 Finish IO time
-IO TIME UPDATED DE : P5 0
-Me quede aqui
+IO TIME UPDATED DE : P2 2
+PROCESS INSERTED TO TREE FROM BQ: P2 with vruntime: 1000
 Termino de correr en el cpu: P1
-Vruntime antes de correr: 15000de P1
-Vruntime updated: 0de P1
-PROCESS ADDED TO BLOCK QUEUE: P1Con tiempo IO: 1000
+FINISH IO TIME AND UP AND CAN CHANGE
+Me quede aqui
+CPU time updated: 3
+Exec time: 2000
+Vruntime updated: 2000de P1
 Sali de aqui
-Finish CPU time
-Value of tree: true
-Value of queue: true
-PROCESS DELETED FROM BLOCK QUEUE: P1 WITH TIMESLICE: 1000
-IO SIM con: P1 WITH TIMESLICE : 1000
-Finish CPU time
-Value of tree: true
+PROCESS DELETED FROM BLOCK QUEUE: P1 WITH IOTIME: 1
+PROCESS ADDED TO BLOCK QUEUE: P1Con tiempo IO: 1
+IO SIM con: P1 WITH TIMESLICE : 1
+Process deleted from tree: P2
+Running process in CPU: P2
 Finish IO time
 IO TIME UPDATED DE : P1 0
-Im not running ProcessUpdaterBQ
-Im not running ProcessProducerBQ
-Im not running ProcessProducerCPU
-Im not running ProcessUpdaterCPU
-Im not running (cpu)
-Value of queue: true
-Im not running ProcessProducerTree_fromBQ
-Im not running (IO)
-Im not running ProcessConsumerBQ
+PROCESS INSERTED TO TREE FROM BQ: P1 with vruntime: 2000
+Termino de correr en el cpu: P2
+FINISH IO TIME AND UP AND CAN CHANGE
+Me quede aqui
+CPU time updated: 2
+Exec time: 2000
+Vruntime updated: 2000de P2
+Sali de aqui
+PROCESS DELETED FROM BLOCK QUEUE: P2 WITH IOTIME: 2
+IO SIM con: P2 WITH TIMESLICE : 2
+PROCESS ADDED TO BLOCK QUEUE: P2Con tiempo IO: 2
+Process deleted from tree: P1
+Running process in CPU: P1
+Finish IO time
+IO TIME UPDATED DE : P2 1
+PROCESS INSERTED TO TREE FROM BQ: P2 with vruntime: 2000
+Termino de correr en el cpu: P1
+FINISH IO TIME AND UP AND CAN CHANGE
+Me quede aqui
+CPU time updated: 2
+Exec time: 3000
+Vruntime updated: 3000de P1
+Process added to tree: P1
+Process deleted from tree: P2
+Running process in CPU: P2
+Termino de correr en el cpu: P2
+CPU time updated: 1
+Exec time: 3000
+Vruntime updated: 3000de P2
+Sali de aqui
+PROCESS DELETED FROM BLOCK QUEUE: P2 WITH IOTIME: 1
+PROCESS ADDED TO BLOCK QUEUE: P2Con tiempo IO: 1
+IO SIM con: P2 WITH TIMESLICE : 1
+Process deleted from tree: P1
+Running process in CPU: P1
+Finish IO time
+IO TIME UPDATED DE : P2 0
+PROCESS INSERTED TO TREE FROM BQ: P2 with vruntime: 3000
+FINISH IO TIME AND UP AND CAN CHANGE
+Termino de correr en el cpu: P1
+CPU time updated: 1
+Exec time: 4000
+Vruntime updated: 4000de P1
+Process deleted from tree: P2
+Running process in CPU: P2
+Process added to tree: P1
+Termino de correr en el cpu: P2
+CPU time updated: 0
+Exec time: 4000
+Vruntime updated: 4000de P2
+Process deleted from tree: P1
+Running process in CPU: P1
+Termino de correr en el cpu: P1
+CPU time updated: 0
 Im not running ProcessConsumerCPU
+Im not running (IO)
+Im not running (cpu)
+Exec time: 5000
+Im not running ProcessProducerBQ
+Im not running ProcessProducerTree_fromBQ
+Im not running ProcessConsumerBQ
+Im not running ProcessUpdaterBQ
+Im not running ProcessProducerCPU
+Vruntime updated: 5000de P1
+Im not running ProcessUpdaterCPU

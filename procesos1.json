@@ -2,40 +2,15 @@
   {
     "id": "P1",
     "tiempo_llegada": 16,
-    "tiempo_CPU": 88,
-    "tiempo_IO": 1000,
-    "prioridad": 2,
-    "v_runtime": 15000
+    "tiempo_CPU": 5,
+    "tiempo_IO": 2,
+    "prioridad": 2
   },
   {
     "id": "P2",
-    "tiempo_llegada": 99,
-    "tiempo_CPU": 90,
-    "tiempo_IO": 1000,
-    "prioridad": 2,
-    "v_runtime": 1000
-  },
-  {
-    "id": "P3",
-    "tiempo_llegada": 55,
+    "tiempo_llegada": 16,
     "tiempo_CPU": 4,
-    "tiempo_IO": 1000,
-    "prioridad": 5,
-    "v_runtime": 1000
-  },
-  {
-    "id": "P4",
-    "tiempo_llegada": 49,
-    "tiempo_CPU": 21,
-    "tiempo_IO": 1000,
-    "prioridad": 10,
-    "v_runtime": 1000
-  },
-  {
-    "id": "P5",
-    "tiempo_llegada": 75,
-    "tiempo_CPU": 81,
-    "tiempo_IO": 1000,
-    "prioridad": 3,
-    "v_runtime": 1000
-  }]
+    "tiempo_IO": 3,
+    "prioridad": 5
+  }
+]

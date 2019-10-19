@@ -6,7 +6,7 @@
 // data structure that represents a node in the tree
 class Node {
 	int data; // holds the key
-	Process process;
+	SchedEntity schedEntity;
 	Node parent; // pointer to the parent
 	Node left; // pointer to left child
 	Node right; // pointer to right child
@@ -62,6 +62,25 @@ public class RedBlackTree {
 		return searchTreeHelper(node.right, key);
 	}
 
+	public int size(){
+		return size(root);
+	}
+	public int size(Node root){
+		if(root==TNULL){
+			return 0;
+		}
+		return 1 + size(root.left) + size(root.right);
+	}
+
+	public int weights(){
+		return weights(root);
+	}
+	public int weights(Node root){
+		if(root==TNULL){
+			return 0;
+		}
+		return root.schedEntity.get_weight() + size(root.left) + size(root.right);
+	}
 	// fix the rb tree modified by the delete operation
 	private void fixDelete(Node x) {
 		Node s;
@@ -407,12 +426,12 @@ public class RedBlackTree {
 
 	// insert the key to the tree in its appropriate position
 	// and fix the tree
-	synchronized void insert(int key, Process process) {
+	synchronized void insert(int key, SchedEntity process) {
 		// Ordinary Binary Search Insertion
 		Node node = new Node();
 		node.parent = null;
 		node.data = key;
-		node.process = process;
+		node.schedEntity = process;
 		node.left = TNULL;
 		node.right = TNULL;
 		node.color = 1; // new node must be red
@@ -545,6 +564,7 @@ public class RedBlackTree {
 	
 	public static void main(String [] args){
 		RedBlackTree bst = new RedBlackTree();
+		/*
 		Process p2 = new Process("1", 10, 10, 10, 9, 2);
         Process p27 = new Process("2", 10, 10, 10, 9, 27);
         Process p19 = new Process("3", 10, 10, 10 ,9, 19);
@@ -573,5 +593,6 @@ public class RedBlackTree {
 		bst.prettyPrint();
 		bst.deleteMin();
 		bst.prettyPrint();
+		*/
 	}
 }
