@@ -109,7 +109,7 @@ class Scheduler{
             System.out.println(str);
             try
             {
-                Thread.sleep(100);
+                Thread.sleep(5000);
             }
             catch(InterruptedException e){
 
@@ -348,7 +348,7 @@ class Scheduler{
     
                             minSet = true;
                         }
-                        
+
                         finishCPUTime = false;
 
                         currentToTree = false;
