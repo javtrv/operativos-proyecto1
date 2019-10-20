@@ -14,6 +14,12 @@ class Scheduler{
     private volatile LinkedBlockingQueue<Process> blockQueue;
     private ArrayList<Process> newProcesses;
 
+    // Clocks
+
+    private volatile int cpu_on;
+    private volatile int cpu_off;
+    private volatile int clock;
+
     // **************************************************** Variables to control scheduler ****************************************************
 
     private volatile boolean cpuEmpty;
@@ -84,6 +90,9 @@ class Scheduler{
         this.needDecision = false;
         this.prio_to_wight = new HashMap<>();
         this.producedToTree = false;
+        this.cpu_off = 0;
+        this.cpu_on = 0;
+        this.clock = 0;
         
         
     }
@@ -109,7 +118,7 @@ class Scheduler{
             System.out.println(str);
             try
             {
-                Thread.sleep(5000);
+                Thread.sleep(100);
             }
             catch(InterruptedException e){
 
@@ -577,7 +586,42 @@ class Scheduler{
         }
     }
 
+    class ClockCPU extends Thread{
+        @Override
+        public void run(){
 
+            while(processHaveCPU() || processHaveIO()){
+                try{
+                    sleep(1);
+                }catch(InterruptedException e){
+                }
+                if(minSet){
+                    cpu_on = cpu_on + 1;
+                }else{
+                    cpu_off = cpu_off + 1;
+                }
+            }
+            System.out.println("El tiempo del CPU activo fue de: " + cpu_on + " ms");
+            System.out.println("El tiempo del CPU inactivo fue de: " + cpu_off + " ms");
+        }
+    }
+
+    class Clock extends Thread{
+        @Override
+        public void run(){
+
+            while(processHaveCPU() || processHaveIO()){
+                try{
+                    sleep(1);
+                }catch(InterruptedException e){
+                }
+                clock = clock + 1;
+                
+            }
+            System.out.println("El tiempo total fue de: " + clock + " ms");
+        }
+
+    }
     public void executeScheduler() { //Aqui corremos el hilo de iniciar el Scheduler
         
         // Init threads
@@ -592,7 +636,9 @@ class Scheduler{
         Decider decider = new Decider();
         CPUSimulator cpuSim = new CPUSimulator();
         IOSimulator ioSim = new IOSimulator();
-        //ThreadChecker  threadChecker = new ThreadChecker();
+        Clock clock = new Clock();
+        ClockCPU clockCPU = new ClockCPU();
+
         fillWeight();
         System.out.println("Weights filled");
         newProcesses = Parser.ParseToProcess("procesos1.json");
@@ -601,7 +647,6 @@ class Scheduler{
         }
         
         init.start();
-        //sleep(10000);
         processConsumerCPU.start();
         processProducerCPU.start();
         processUpdaterCPU.start();
@@ -612,7 +657,8 @@ class Scheduler{
         processUpdaterBQ.start();
         cpuSim.start();
         ioSim.start();
-
+        clock.start();
+        clockCPU.start();
         //System.out.println("?");
         
 
