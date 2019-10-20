@@ -39,7 +39,9 @@ Estructuras:
 
 Original Sources: 
 
-    RedBlackBST: https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+    RedBlackBST:  Red Black Tree implementation in Java
+                  Author: Algorithm Tutor (Cormen)
+                  Tutorial URL: https://algorithmtutor.com/Data-Structures/Tree/Red-Black-Trees/
 
     Queue: Java Utils
 
