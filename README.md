@@ -10,12 +10,10 @@ Con la siguiente estructura (donde N es el numero de veces que se va a repetir):
 [
   {
     'repeat(N)': {
-      id: '{{objectId()}}',
       tiempo_llegada: '{{integer(0, 100)}}',
       tiempo_CPU: '{{integer(0, 100)}}',
       tiempo_IO: '{{integer(0, 100)}}',
       prioridad: '{{integer(0, 10)}}',
-      v_runtime:0
     }
   }
 ]
