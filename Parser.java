@@ -13,10 +13,11 @@ class Parser
 
   @SuppressWarnings("unchecked")
   private static ArrayList<Process> procesosNuevos = new ArrayList<Process>();
-  Integer contador_procesos;
+  private static int contador_procesos = 0;
+
   public static ArrayList<Process> ParseToProcess(String file) 
   {
-    //Planificador planificador = new Planificador();
+
     //JSON parser object to parse read file
     JSONParser jsonParser = new JSONParser();
     try (FileReader reader = new FileReader(file))
@@ -46,7 +47,6 @@ class Parser
 
   private static void parseProcessObject(JSONObject proc) 
   {
-    contador_procesos++;
     Integer aux;
     String id = "P" + contador_procesos;
     Integer tiempoLlegada = (int) (long) proc.get("tiempo_llegada");
@@ -62,6 +62,7 @@ class Parser
     //Integer vRuntime = (int) (long) proc.get("v_runtime");
     Process p = new Process(id, tiempoLlegada, tiempoIO, tiempoCPU, prioridad);
     procesosNuevos.add(p);
+    contador_procesos++;
 
   }
 }
