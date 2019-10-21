@@ -14,6 +14,7 @@ class Scheduler{
     private volatile LinkedBlockingQueue<Process> blockQueue;
     private ArrayList<Process> newProcesses;
     private volatile HashMap<String, Object> schedulerTable;
+    
 
     // Clocks
 
@@ -66,6 +67,7 @@ class Scheduler{
 
     private volatile HashMap<String, Process> processTable;
     private volatile HashMap<Integer, Integer> prio_to_wight;
+    private volatile HashMap<String, SchedEntity> schedEntityTable;
 
     public Scheduler(){
         
@@ -95,6 +97,7 @@ class Scheduler{
         this.cpu_on = 0;
         this.clock = 0;
         this.schedulerTable = new HashMap<>();
+        this.schedEntityTable = new HashMap<>();
         
         
     }
@@ -173,6 +176,9 @@ class Scheduler{
             this.schedulerTable.put("tree", keysTree);
             this.schedulerTable.put("blockQueue", keysBQ);
             this.schedulerTable.put("processTable", processTable);
+            this.schedulerTable.put("schedEntityTable", schedEntityTable);
+            this.schedulerTable.put("currentInCPU", currentProcess);
+            this.schedulerTable.put("currentInIO", currentIOProcess);
             return this.schedulerTable;
         } 
 
@@ -571,6 +577,8 @@ class Scheduler{
                     sleep(1000);
 
                     SchedEntity schedEntity = process.createSchedEntity(prio_to_wight.get(process.get_prioridad()));
+
+                    schedEntityTable.put(schedEntity.get_pid(), schedEntity);
 
                     readyTree.insert(0, schedEntity);
 
