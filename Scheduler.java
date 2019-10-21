@@ -13,6 +13,7 @@ class Scheduler{
     private volatile RedBlackTree readyTree;
     private volatile LinkedBlockingQueue<Process> blockQueue;
     private ArrayList<Process> newProcesses;
+    private volatile HashMap<String, Object> schedulerTable;
 
     // Clocks
 
@@ -93,6 +94,7 @@ class Scheduler{
         this.cpu_off = 0;
         this.cpu_on = 0;
         this.clock = 0;
+        this.schedulerTable = new HashMap<>();
         
         
     }
@@ -154,11 +156,25 @@ class Scheduler{
         public int calculateTimeslice(Process p){
             int weights = readyTree.weights();
             if(weights != 0){
-                //return (int) p.get_schedEntity().get_weight() / readyTree.weights();
-                return 1000;
+                return (int) p.get_schedEntity().get_weight() / readyTree.weights();
+                //return 1000;
             }
             return 1000;
         }
+
+
+        public HashMap<String, Object> getSchedulerData(){
+            this.schedulerTable.clear();
+            LinkedList<String> keysTree = readyTree.keys();
+            LinkedList<String> keysBQ = new LinkedList<String>();
+            for(Process i : blockQueue){
+                keysBQ.add(i.get_pid());
+            }
+            this.schedulerTable.put("tree", keysTree);
+            this.schedulerTable.put("blockQueue", keysBQ);
+            this.schedulerTable.put("processTable", processTable);
+            return this.schedulerTable;
+        } 
 
         // Debo actualizar el CPUTimeslice para que se asigne a esto y no al vruntime
         // Tambien debo asignar un iotimeslice constante y parametrizable 
@@ -327,15 +343,6 @@ class Scheduler{
                     }
                     else if(finishCPUTime && currentCPU_Updated && canCPUCurrentChange){
 
-                        
-/*                         writeToScreen("Finish CPU time");
-                        writeToScreen("Value of tree: " + Boolean.toString(readyTree.isEmpty()));
-                        writeToScreen("Value of queue: " + Boolean.toString(blockQueue.isEmpty()));
-                        for (Process var : blockQueue) {
-                            writeToScreen("In block queue: " + var.get_pid());
-                        } */
-
-                        // Verifico si aun hay procesos para correr y no me voy a quedar esperando por siempre
 
                         if(processHaveCPU()){
 
@@ -580,11 +587,16 @@ class Scheduler{
             }
             System.out.println("Outside initSsched");
             readyTree.prettyPrint();
+            //System.out.println("KEYS");
+            //System.out.println(readyTree.keys());
             //System.out.println(readyTree.keys());
             noMoreProcess = true;
+            
+
 
         }
     }
+
 
     class ClockCPU extends Thread{
         @Override
@@ -661,8 +673,10 @@ class Scheduler{
         clockCPU.start();
         //System.out.println("?");
         
+        
 
     }
+
 
 
 }

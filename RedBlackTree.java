@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 // Red Black Tree implementation in Java
 // Author: Algorithm Tutor
 // Tutorial URL: https://algorithmtutor.com/Data-Structures/Tree/Red-Black-Trees/
@@ -62,6 +64,23 @@ public class RedBlackTree {
 		return searchTreeHelper(node.right, key);
 	}
 
+	public LinkedList<String> keys(){
+		LinkedList<String> list = new LinkedList<String>();
+		return keys(root, list);
+	}
+
+	public LinkedList<String> keys(Node root, LinkedList<String> list){ 
+		if(root==TNULL){
+			return list;
+		}
+		
+		keys(root.left, list);
+		list.add(root.schedEntity.get_pid());
+		keys(root.right, list);
+		return list;
+	}
+
+	
 	public int size(){
 		return size(root);
 	}
@@ -563,18 +582,18 @@ public class RedBlackTree {
 	}
 	
 	public static void main(String [] args){
-		RedBlackTree bst = new RedBlackTree();
-		/*
-		Process p2 = new Process("1", 10, 10, 10, 9, 2);
-        Process p27 = new Process("2", 10, 10, 10, 9, 27);
-        Process p19 = new Process("3", 10, 10, 10 ,9, 19);
-        Process p7 = new Process("4", 10, 10, 10 ,9, 7);
-        Process p25 = new Process("5", 10, 10, 10 ,9, 25);
-        Process p31 = new Process("6", 10, 10, 10,9, 31);
-        Process p34 = new Process("7", 10, 10, 10,9, 34);
-        Process p65 = new Process("8", 10, 10, 10,9, 65);
-        Process p49 = new Process("9", 10, 10, 10,9, 49);
-		Process p98 = new Process("10", 10, 10, 10,9, 19);
+		/* RedBlackTree bst = new RedBlackTree();
+		
+		SchedEntity p2 = new SchedEntity("1", 10, 10);
+        SchedEntity p27 = new SchedEntity("2", 10, 10);
+        SchedEntity p19 = new SchedEntity("3", 10, 10);
+        SchedEntity p7 = new SchedEntity("4", 10, 10);
+        SchedEntity p25 = new SchedEntity("5", 10, 10);
+        SchedEntity p31 = new SchedEntity("6", 10, 10);
+        SchedEntity p34 = new SchedEntity("7", 10, 10);
+        SchedEntity p65 = new SchedEntity("8", 10, 10);
+        SchedEntity p49 = new SchedEntity("9", 10, 10);
+		SchedEntity p98 = new SchedEntity("10", 10, 10);
 		
 		bst.insert(7, p2);
         bst.insert(3, p27);
@@ -584,15 +603,13 @@ public class RedBlackTree {
         bst.insert(11, p31);
         bst.insert(22, p34);
         bst.insert(26, p65);
-        //bst.insert(19, p49);
-        //bst.insert(19, p98);
-		
-		Node n = bst.min();
-		System.out.println(n.process.get_pid());
+        bst.insert(19, p49);
+		bst.insert(19, p98);
 		
 		bst.prettyPrint();
-		bst.deleteMin();
-		bst.prettyPrint();
-		*/
+		System.out.println(bst.keys());
+		bst.inorder();
+ */
+		
 	}
 }
