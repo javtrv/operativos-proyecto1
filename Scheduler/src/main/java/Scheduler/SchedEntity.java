@@ -1,3 +1,4 @@
+package Scheduler;
 public class SchedEntity{
 
     private String pid;

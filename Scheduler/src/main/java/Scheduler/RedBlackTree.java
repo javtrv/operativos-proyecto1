@@ -1,3 +1,4 @@
+package Scheduler;
 import java.util.LinkedList;
 
 // Red Black Tree implementation in Java
@@ -34,7 +35,7 @@ public class RedBlackTree {
 			System.out.print(node.data + " ");
 			preOrderHelper(node.left);
 			preOrderHelper(node.right);
-		} 
+		}
 	}
 
 	private void inOrderHelper(Node node) {
@@ -42,7 +43,7 @@ public class RedBlackTree {
 			inOrderHelper(node.left);
 			System.out.print(node.data + " ");
 			inOrderHelper(node.right);
-		} 
+		}
 	}
 
 	private void postOrderHelper(Node node) {
@@ -50,7 +51,7 @@ public class RedBlackTree {
 			postOrderHelper(node.left);
 			postOrderHelper(node.right);
 			System.out.print(node.data + " ");
-		} 
+		}
 	}
 
 	private Node searchTreeHelper(Node node, int key) {
@@ -60,7 +61,7 @@ public class RedBlackTree {
 
 		if (key < node.data) {
 			return searchTreeHelper(node.left, key);
-		} 
+		}
 		return searchTreeHelper(node.right, key);
 	}
 
@@ -69,18 +70,18 @@ public class RedBlackTree {
 		return keys(root, list);
 	}
 
-	public LinkedList<String> keys(Node root, LinkedList<String> list){ 
+	public LinkedList<String> keys(Node root, LinkedList<String> list){
 		if(root==TNULL){
 			return list;
 		}
-		
+
 		keys(root.left, list);
 		list.add(root.schedEntity.get_pid());
 		keys(root.right, list);
 		return list;
 	}
 
-	
+
 	public int size(){
 		return size(root);
 	}
@@ -125,7 +126,7 @@ public class RedBlackTree {
 						s.color = 1;
 						rightRotate(s);
 						s = x.parent.right;
-					} 
+					}
 
 					// case 3.4
 					s.color = x.parent.color;
@@ -155,7 +156,7 @@ public class RedBlackTree {
 						s.color = 1;
 						leftRotate(s);
 						s = x.parent.left;
-					} 
+					}
 
 					// case 3.4
 					s.color = x.parent.color;
@@ -164,7 +165,7 @@ public class RedBlackTree {
 					rightRotate(x.parent);
 					x = root;
 				}
-			} 
+			}
 		}
 		x.color = 0;
 	}
@@ -200,7 +201,7 @@ public class RedBlackTree {
 		if (z == TNULL) {
 			System.out.println("Couldn't find key in the tree");
 			return;
-		} 
+		}
 
 		y = z;
 		int yOriginalColor = y.color;
@@ -231,12 +232,12 @@ public class RedBlackTree {
 			fixDelete(x);
 		}
 	}
-	
-	// min of the tree 
+
+	// min of the tree
 
 	synchronized Node min() {
         //StdOut.print("Inside min!");
-                    
+
         if (this.root == TNULL)
             try {
                 wait();
@@ -256,7 +257,7 @@ public class RedBlackTree {
         else
             return min(x.left);
 	}
-	
+
 	// fix the red-black tree
 	private void fixInsert(Node k){
 		Node u;
@@ -288,7 +289,7 @@ public class RedBlackTree {
 					u.color = 0;
 					k.parent.color = 0;
 					k.parent.parent.color = 1;
-					k = k.parent.parent;	
+					k = k.parent.parent;
 				} else {
 					if (k == k.parent.right) {
 						// mirror case 3.2.2
@@ -319,7 +320,7 @@ public class RedBlackTree {
 		      System.out.print("L----");
 		      indent += "|    ";
 		   }
-            
+
            String sColor = root.color == 1?"RED":"BLACK";
 		   System.out.println(root.data + "(" + sColor + ")");
 		   printHelper(root.left, indent, false);
@@ -390,7 +391,7 @@ public class RedBlackTree {
 	// find the predecessor of a given node
 	public Node predecessor(Node x) {
 		// if the left subtree is not null,
-		// the predecessor is the rightmost node in the 
+		// the predecessor is the rightmost node in the
 		// left subtree
 		if (x.left != TNULL) {
 			return maximum(x.left);
@@ -540,7 +541,7 @@ public class RedBlackTree {
 		if (z == TNULL) {
 			System.out.println("Couldn't find key in the tree");
 			return;
-		} 
+		}
 
 		y = z;
 		int yOriginalColor = y.color;
@@ -571,7 +572,7 @@ public class RedBlackTree {
 			fixDelete(x);
 		}
 	}
-	
+
 
 	public boolean isEmpty(){
 		return root == TNULL;
@@ -580,10 +581,10 @@ public class RedBlackTree {
 	public void prettyPrint() {
         printHelper(this.root, "", true);
 	}
-	
+
 	public static void main(String [] args){
 		/* RedBlackTree bst = new RedBlackTree();
-		
+
 		SchedEntity p2 = new SchedEntity("1", 10, 10);
         SchedEntity p27 = new SchedEntity("2", 10, 10);
         SchedEntity p19 = new SchedEntity("3", 10, 10);
@@ -594,7 +595,7 @@ public class RedBlackTree {
         SchedEntity p65 = new SchedEntity("8", 10, 10);
         SchedEntity p49 = new SchedEntity("9", 10, 10);
 		SchedEntity p98 = new SchedEntity("10", 10, 10);
-		
+
 		bst.insert(7, p2);
         bst.insert(3, p27);
         bst.insert(18, p19);
@@ -605,11 +606,11 @@ public class RedBlackTree {
         bst.insert(26, p65);
         bst.insert(19, p49);
 		bst.insert(19, p98);
-		
+
 		bst.prettyPrint();
 		System.out.println(bst.keys());
 		bst.inorder();
  */
-		
+
 	}
 }

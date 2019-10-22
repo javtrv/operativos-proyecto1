@@ -1,7 +1,7 @@
 /**
  * Process
  */
-import java.util.*; 
+package Scheduler;
 
 public class Process {
 

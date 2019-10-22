@@ -1,0 +1,37 @@
+[
+  {
+    "id": "P1",
+    "tiempo_llegada": 16,
+    "tiempo_CPU": 5,
+    "tiempo_IO": 2,
+    "prioridad": 2
+  },
+  {
+    "id": "P2",
+    "tiempo_llegada": 16,
+    "tiempo_CPU": 4,
+    "tiempo_IO": 3,
+    "prioridad": 5
+  },
+  {
+    "id": "P3",
+    "tiempo_llegada": 16,
+    "tiempo_CPU": 6,
+    "tiempo_IO": 3,
+    "prioridad": 10
+  },
+  {
+    "id": "P4",
+    "tiempo_llegada": 16,
+    "tiempo_CPU": 2,
+    "tiempo_IO": 1,
+    "prioridad": 3
+  },
+  {
+    "id": "P5",
+    "tiempo_llegada": 16,
+    "tiempo_CPU": 4,
+    "tiempo_IO": 1,
+    "prioridad": 4
+  }
+]

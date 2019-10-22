@@ -1,7 +1,10 @@
+package Scheduler;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList; 
+import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,7 +18,7 @@ class Parser
   private static ArrayList<Process> procesosNuevos = new ArrayList<Process>();
   private static int contador_procesos = 0;
 
-  public static ArrayList<Process> ParseToProcess(String file) 
+  public static ArrayList<Process> ParseToProcess(String file)
   {
 
     //JSON parser object to parse read file
@@ -26,14 +29,14 @@ class Parser
             System.out.println(reader);
             Object obj = jsonParser.parse(reader);
             JSONArray listaProcesos = (JSONArray) obj;
-            listaProcesos.forEach( proc ->  parseProcessObject( (JSONObject) proc ) 
+            listaProcesos.forEach( proc ->  parseProcessObject( (JSONObject) proc )
               );
             System.out.println("Lista de procesos nuevos");
             System.out.println(procesosNuevos);
             for (Process var : procesosNuevos) {
               System.out.println(var.get_pid());
             }
-            
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -45,7 +48,7 @@ class Parser
         return procesosNuevos;
   }
 
-  private static void parseProcessObject(JSONObject proc) 
+  private static void parseProcessObject(JSONObject proc)
   {
     Integer aux;
     String id = "P" + contador_procesos;

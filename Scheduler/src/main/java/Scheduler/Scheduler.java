@@ -1,8 +1,8 @@
+package Scheduler;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.*; 
 
 
 
@@ -14,7 +14,7 @@ class Scheduler{
     private volatile LinkedBlockingQueue<Process> blockQueue;
     private ArrayList<Process> newProcesses;
     private volatile HashMap<String, Object> schedulerTable;
-    
+
 
     // Clocks
 
@@ -29,7 +29,7 @@ class Scheduler{
     private volatile boolean finishIOTime;
     private volatile String currentPID;
     private volatile boolean minSet;
-    private volatile Process min; 
+    private volatile Process min;
     private volatile boolean ioSet;
     private volatile boolean ioEmpty;
     private volatile boolean noMoreProcess;
@@ -56,8 +56,8 @@ class Scheduler{
     private volatile boolean currentToBQ;
     private volatile boolean currentToTree;
     private volatile Process currentProcess;
-    
-    
+
+
     // ************************** Timeslices **************************
 
     private volatile int CPUtimeslice;
@@ -70,7 +70,7 @@ class Scheduler{
     private volatile HashMap<String, SchedEntity> schedEntityTable;
 
     public Scheduler(){
-        
+
         this.blockQueue = new LinkedBlockingQueue<Process>();
         this.readyTree = new RedBlackTree();
         this.minSet = false;
@@ -98,8 +98,8 @@ class Scheduler{
         this.clock = 0;
         this.schedulerTable = new HashMap<>();
         this.schedEntityTable = new HashMap<>();
-        
-        
+
+
     }
 
         public void fillWeight(){
@@ -180,10 +180,10 @@ class Scheduler{
             this.schedulerTable.put("currentInCPU", currentProcess);
             this.schedulerTable.put("currentInIO", currentIOProcess);
             return this.schedulerTable;
-        } 
+        }
 
         // Debo actualizar el CPUTimeslice para que se asigne a esto y no al vruntime
-        // Tambien debo asignar un iotimeslice constante y parametrizable 
+        // Tambien debo asignar un iotimeslice constante y parametrizable
 
         // Hilo que simula la ejecucion del proceso en el CPU
         class CPUSimulator extends Thread {
@@ -208,18 +208,18 @@ class Scheduler{
 
                             needDecision = true;
 
-                            
+
                         }
 
                     }
 
                     System.out.println("Im not running (cpu)");
-                    
+
                 }catch(InterruptedException e){
                 }
             }
         }
-    
+
         // Hilo que simula la ejecucion del IO
         class IOSimulator extends Thread{
             // Le debo pasar el timeslice que el proceso va a pasar en io
@@ -228,7 +228,7 @@ class Scheduler{
             public void run(){
                 try{
                     while(processHaveCPU() || processHaveIO()){
-                        
+
                             if(ioSet){
 
                                 writeToScreen("IO SIM con: " + currentIOProcess.get_pid() + " WITH TIMESLICE : " + Integer.toString(currentIOProcess.get_tiempo_io()));
@@ -236,32 +236,32 @@ class Scheduler{
                                 sleep(1000);
 
                                 writeToScreen("Finish IO time");
-                                
+
                                 finishIOTime = true;
 
-                                ioSet = false;   
+                                ioSet = false;
                             }
-                            
+
 
 
                         }
 
-                    
+
 
                     System.out.println("Im not running (IO)");
-                    
+
                 }catch(InterruptedException e){
                 }
             }
         }
-    
+
         class ProcessUpdaterCPU extends Thread{
             // Aqui actualizo el tiempo de los procesos (IO y CPU)
             @Override
             public void run(){
                 while(processHaveCPU() || processHaveIO())
                 {
-                    
+
                     if(finishCPUTime && !currentCPU_Updated){
 
                         currentProcess.update_cputime();
@@ -277,7 +277,7 @@ class Scheduler{
                         writeToScreen("Vruntime updated: " + Integer.toString(currentProcess.get_schedEntity().get_vruntime()) + "de " + currentProcess.get_pid());
 
                         currentCPU_Updated = true;
-    
+
                     }
                 }
                 writeToScreen("Im not running ProcessUpdaterCPU");
@@ -291,7 +291,7 @@ class Scheduler{
                 while(processHaveCPU() || processHaveIO())
                 {
                     if(currentToTree){
-                        
+
                         readyTree.insert(currentProcess.get_schedEntity().get_vruntime(),currentProcess.get_schedEntity());
 
                         canCPUCurrentChange = true;
@@ -304,7 +304,7 @@ class Scheduler{
 
                 }
                 writeToScreen("Im not running ProcessProducerCPU");
-                
+
             }
         }
 
@@ -314,11 +314,11 @@ class Scheduler{
 
             @Override
             public void run(){
-                
+
 
                 while(processHaveCPU() || processHaveIO()){
 
-                    
+
                     if(cpuEmpty){
 
                         writeToScreen("cpu epmty");
@@ -333,7 +333,7 @@ class Scheduler{
 
                         writeToScreen("Process deleted from tree: " + min.get_pid());
 
-                        
+
                         currentPID = min_process.get_pid();
 
                         currentProcess = min_process;
@@ -357,17 +357,17 @@ class Scheduler{
                             SchedEntity min = min_aux.schedEntity;
 
                             Process min_process = processTable.get(min.get_pid());
-        
+
                             readyTree.deleteMin();
-        
+
                             writeToScreen("Process deleted from tree: " + min.get_pid());
-        
+
                             currentPID = min_process.get_pid();
-        
+
                             currentProcess = min_process;
-    
+
                             CPUtimeslice = calculateTimeslice(currentProcess);
-    
+
                             minSet = true;
                         }
 
@@ -380,16 +380,16 @@ class Scheduler{
                         currentCPU_Updated = false;
 
                         canCPUCurrentChange = false;
-                        
+
 
 
                     }
                 }
                 System.out.println("Im not running ProcessConsumerCPU");
-                
+
             }
         }
-    
+
         class Decider extends Thread {
             @Override
             public void run(){
@@ -424,7 +424,7 @@ class Scheduler{
 
                 if(currentToBQ){
                     // Put en la cola
-                    
+
                     blockQueue.add(currentProcess);
 
                     writeToScreen("PROCESS ADDED TO BLOCK QUEUE: " + currentProcess.get_pid() + "Con tiempo IO: " + Integer.toString(currentProcess.get_tiempo_io()));
@@ -432,10 +432,10 @@ class Scheduler{
                     canCPUCurrentChange = true;
 
                     currentToBQ = false;
-                    
+
                 }
-                
-            }    
+
+            }
                 writeToScreen("Im not running ProcessProducerBQ");
             }
         }
@@ -453,7 +453,7 @@ class Scheduler{
                         currentIOProcess.update_iotime();
 
                         writeToScreen("IO TIME UPDATED DE : " + currentIOProcess.get_pid() + " " + Integer.toString(currentIOProcess.get_tiempo_io()));
-    
+
                         // Verifico que haya procesos con tiempo de IO
                         currentIO_Updated = true;
                     }
@@ -463,7 +463,7 @@ class Scheduler{
 
             }
         }
-        
+
         class ProcessProducerTree_fromBQ extends Thread{
             @Override
             public void run(){
@@ -473,9 +473,9 @@ class Scheduler{
                     if(finishIOTime && currentIO_Updated && !producedToTree){
 
                         if(currentIOProcess.get_tiempo_cpu() > 0){
-    
+
                             readyTree.insert(currentIOProcess.get_schedEntity().get_vruntime(),currentIOProcess.get_schedEntity());
-    
+
                             writeToScreen("PROCESS INSERTED TO TREE FROM BQ: " + currentIOProcess.get_pid() + " with vruntime: " + currentIOProcess.get_schedEntity().get_vruntime());
                         }
                         canIOCurrentChange = true;
@@ -491,7 +491,7 @@ class Scheduler{
         class ProcessConsumerBQ extends Thread {
             @Override
             public void run(){
-            
+
             while(processHaveCPU() || processHaveIO()){
                 //writeToScreen("BQ STATUS: " + blockQueue.size());
                 //writeToScreen("Process have io: " + processHaveIO());
@@ -508,7 +508,7 @@ class Scheduler{
                     catch(InterruptedException e){
 
                     }
-                
+
                     currentIOProcess = p;
 
                     //IOtimeslice = p.get_tiempo_io();
@@ -531,21 +531,21 @@ class Scheduler{
                             p = blockQueue.take();
                         }
                         catch(InterruptedException e){
-        
+
                         }
                         writeToScreen("Sali de aqui");
 
                         //IOtimeslice = p.get_tiempo_io();
-    
+
                         currentIOProcess = p;
-    
+
                         writeToScreen("PROCESS DELETED FROM BLOCK QUEUE: " + currentIOProcess.get_pid() + " WITH IOTIME: " + Integer.toString(currentIOProcess.get_tiempo_io()));
-    
+
                         finishIOTime = false;
-    
+
                         ioSet = true;
 
-                        
+
                     }
                     finishIOTime = false;
 
@@ -555,24 +555,24 @@ class Scheduler{
 
                     producedToTree = false;
 
-                    
+
 
                 }
 
             }
-            writeToScreen("Im not running ProcessConsumerBQ");   
+            writeToScreen("Im not running ProcessConsumerBQ");
 
             }
         }
 
-    
+
     class initSchedulerThread extends Thread{
         @Override
         public void run(){
             // Load Processes to New Processes list
-            
+
             for (Process process: newProcesses) {
-                
+
                 try{
                     sleep(1000);
 
@@ -586,7 +586,7 @@ class Scheduler{
 
                     System.out.println(process.get_pid());
                     //sleep(1000);
-                    
+
                 }catch(InterruptedException e){
                 }
                 System.out.print("Arbol de listos: ");
@@ -599,7 +599,7 @@ class Scheduler{
             //System.out.println(readyTree.keys());
             //System.out.println(readyTree.keys());
             noMoreProcess = true;
-            
+
 
 
         }
@@ -636,16 +636,16 @@ class Scheduler{
                 }catch(InterruptedException e){
                 }
                 clock = clock + 1;
-                
+
             }
             System.out.println("El tiempo total fue de: " + clock + " ms");
         }
 
     }
     public void executeScheduler() { //Aqui corremos el hilo de iniciar el Scheduler
-        
+
         // Init threads
-        initSchedulerThread init = new initSchedulerThread(); 
+        initSchedulerThread init = new initSchedulerThread();
         ProcessConsumerCPU processConsumerCPU = new ProcessConsumerCPU();
         ProcessProducerCPU processProducerCPU = new ProcessProducerCPU();
         ProcessUpdaterCPU processUpdaterCPU = new ProcessUpdaterCPU();
@@ -661,11 +661,11 @@ class Scheduler{
 
         fillWeight();
         System.out.println("Weights filled");
-        newProcesses = Parser.ParseToProcess("procesos1.json");
+        newProcesses = Parser.ParseToProcess("src/main/resources/procesos1.json");
         for (Process process : newProcesses) {
             processTable.put(process.get_pid(), process);
         }
-        
+
         init.start();
         processConsumerCPU.start();
         processProducerCPU.start();
@@ -680,8 +680,8 @@ class Scheduler{
         clock.start();
         clockCPU.start();
         //System.out.println("?");
-        
-        
+
+
 
     }
 
