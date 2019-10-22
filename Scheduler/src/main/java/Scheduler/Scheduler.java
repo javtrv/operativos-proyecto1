@@ -179,6 +179,9 @@ class Scheduler{
             this.schedulerTable.put("schedEntityTable", schedEntityTable);
             this.schedulerTable.put("currentInCPU", currentProcess);
             this.schedulerTable.put("currentInIO", currentIOProcess);
+            this.schedulerTable.put("ioSimOn", ioSet);
+            this.schedulerTable.put("cpuSimOn", minSet);
+
             return this.schedulerTable;
         }
 
