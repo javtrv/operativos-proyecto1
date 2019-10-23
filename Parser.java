@@ -6,7 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
+import java.util.Collections;
 
 class Parser
 {
@@ -29,6 +29,11 @@ class Parser
             listaProcesos.forEach( proc ->  parseProcessObject( (JSONObject) proc ) 
               );
             System.out.println("Lista de procesos nuevos");
+            System.out.println(procesosNuevos);
+            
+            Collections.sort(procesosNuevos);
+            
+            System.out.println("Lista de procesos ordenados");
             System.out.println(procesosNuevos);
             for (Process var : procesosNuevos) {
               System.out.println(var.get_pid());
@@ -65,4 +70,7 @@ class Parser
     contador_procesos++;
 
   }
+
+
+
 }

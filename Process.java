@@ -3,7 +3,7 @@
  */
 import java.util.*; 
 
-public class Process {
+public class Process implements Comparable<Process> {
 
     private String pid;
     private int tiempoLlegada;
@@ -11,6 +11,7 @@ public class Process {
     private int tiempoIO;
     private int prioridad;
     private int execTime;
+    private int totalTimeEx;
     private SchedEntity schedEntity;
 
 
@@ -70,5 +71,21 @@ public class Process {
 
     public int get_execTime(){
         return this.execTime;
+    }
+
+        @Override
+    public String toString() {
+        return "Mi tiempo de llegada es: " + tiempoLlegada + " y soy el proceso " + pid ;
+    }
+
+    @Override
+    public int compareTo(Process p){
+        if(p.get_tiempo_llegada()>tiempoLlegada){
+            return -1;
+        }else if(p.get_tiempo_llegada()<tiempoLlegada){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 }
