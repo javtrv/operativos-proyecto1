@@ -47,6 +47,6 @@ Original Sources:
 
   Dependencies:
 
-    StdIn: https://introcs.cs.princeton.edu/java/stdlib/StdIn.java.html
+    JavaFX
 
-    StdOut: https://introcs.cs.princeton.edu/java/stdlib/StdOut.java.html
+    json-simple
