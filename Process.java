@@ -11,6 +11,7 @@ public class Process implements Comparable<Process> {
     private int tiempoIO;
     private int prioridad;
     private int execTime;
+    private int totalTimeEx;
     private SchedEntity schedEntity;
 
 
@@ -72,7 +73,7 @@ public class Process implements Comparable<Process> {
         return this.execTime;
     }
 
-        @Override
+    @Override
     public String toString() {
         return "PID: " + pid + ", CPU: " + tiempoCPU+ ", I/O: " + tiempoIO + ", EXC: " + execTime ;
     }
