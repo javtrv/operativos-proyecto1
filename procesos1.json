@@ -8,7 +8,7 @@
   },
   {
     "id": "P2",
-    "tiempo_llegada": 16,
+    "tiempo_llegada": 6,
     "tiempo_CPU": 4,
     "tiempo_IO": 3,
     "prioridad": 5

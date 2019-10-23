@@ -1,0 +1,73 @@
+java -cp .:json-simple-1.1.1.jar main  procesos1.json
+Weights filled
+java.io.FileReader@816f27d
+Lista de procesos nuevos
+[Process@7530d0a]
+P0
+cpu epmty
+IO EMPTY
+Process added to tree from new list: 
+P0
+Arbol de listos: Outside initSsched
+Process deleted from tree: P0
+Timeslice: 1000
+Running process in CPU: P0
+Termino de correr en el cpu: P0
+CPU time updated: 4
+Exec time: 1000
+Vruntime updated: 1000de P0
+IO EMPTY PROCESS DELETED FROM BLOCK QUEUE: P0 WITH TIMESLICE: 2
+PROCESS ADDED TO BLOCK QUEUE: P0Con tiempo IO: 2
+IO SIM con: P0 WITH TIMESLICE : 2
+Finish IO time
+IO TIME UPDATED DE : P0 1
+Process deleted from tree: P0
+Running process in CPU: P0
+PROCESS INSERTED TO TREE FROM BQ: P0 with vruntime: 1000
+FINISH IO TIME AND UP AND CAN CHANGE
+Me quede aqui
+Termino de correr en el cpu: P0
+CPU time updated: 3
+Exec time: 2000
+Vruntime updated: 2000de P0
+Sali de aqui
+PROCESS ADDED TO BLOCK QUEUE: P0Con tiempo IO: 1
+PROCESS DELETED FROM BLOCK QUEUE: P0 WITH IOTIME: 1
+IO SIM con: P0 WITH TIMESLICE : 1
+Finish IO time
+IO TIME UPDATED DE : P0 0
+Process deleted from tree: P0
+PROCESS INSERTED TO TREE FROM BQ: P0 with vruntime: 2000
+FINISH IO TIME AND UP AND CAN CHANGE
+CPU time updated: 2
+Exec time: 3000
+Vruntime updated: 3000de P0
+Running process in CPU: P0
+PROCESS INSERTED TO TREE FROM BQ: P0 with vruntime: 2000
+Termino de correr en el cpu: P0
+Process added to tree: P0
+Process deleted from tree: P0
+Running process in CPU: P0
+Termino de correr en el cpu: P0
+CPU time updated: 1
+Exec time: 3001
+Vruntime updated: 3001de P0
+Process added to tree: P0
+Process deleted from tree: P0
+Running process in CPU: P0
+Termino de correr en el cpu: P0
+CPU time updated: 0
+Im not running (cpu)
+Im not running (IO)
+Im not running ProcessConsumerCPU
+El tiempo del CPU activo fue de: 4160 ms
+El tiempo del CPU inactivo fue de: 5266 ms
+El tiempo total fue de: 9408 ms
+Exec time: 3002
+Vruntime updated: 3002de P0
+Im not running ProcessUpdaterCPU
+Im not running ProcessUpdaterBQ
+Im not running ProcessConsumerBQ
+Im not running ProcessProducerCPU
+Im not running ProcessProducerTree_fromBQ
+Im not running ProcessProducerBQ
