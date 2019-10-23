@@ -10,10 +10,10 @@ Con la siguiente estructura (donde N es el numero de veces que se va a repetir):
 [
   {
     'repeat(N)': {
-      tiempo_llegada: '{{integer(0, 100)}}',
-      tiempo_CPU: '{{integer(0, 100)}}',
+      tiempo_llegada: '{{integer(1, 100)}}',
+      tiempo_CPU: '{{integer(1, 100)}}',
       tiempo_IO: '{{integer(0, 100)}}',
-      prioridad: '{{integer(0, 10)}}',
+      prioridad: '{{integer(1, 10)}}',
     }
   }
 ]
@@ -22,7 +22,7 @@ Para correr el proyecto se deben usar los siguientes comandos:
 
 
 make
-make run
+make run file="<nombre del archivo>"
 
 # Estructuras
 

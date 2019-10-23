@@ -21,7 +21,7 @@ clean:
 	$(RM) *.class
 
 run:
-	java -cp $(JAR) main  procesos1.json
+	java -cp $(JAR) main  $(file)
 
 test:
 	java RedBlackTree

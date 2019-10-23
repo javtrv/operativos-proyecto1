@@ -623,6 +623,9 @@ class Scheduler{
             }
             System.out.println("El tiempo del CPU activo fue de: " + cpu_on + " ms");
             System.out.println("El tiempo del CPU inactivo fue de: " + cpu_off + " ms");
+            for (Process i : processTable.values()) {
+                System.out.println(i);
+            }
         }
     }
 
@@ -642,7 +645,7 @@ class Scheduler{
         }
 
     }
-    public void executeScheduler() { //Aqui corremos el hilo de iniciar el Scheduler
+    public void executeScheduler(String nameFile) { //Aqui corremos el hilo de iniciar el Scheduler
         
         // Init threads
         initSchedulerThread init = new initSchedulerThread(); 
@@ -661,7 +664,7 @@ class Scheduler{
 
         fillWeight();
         System.out.println("Weights filled");
-        newProcesses = Parser.ParseToProcess("procesos1.json");
+        newProcesses = Parser.ParseToProcess(nameFile);
         for (Process process : newProcesses) {
             processTable.put(process.get_pid(), process);
         }
