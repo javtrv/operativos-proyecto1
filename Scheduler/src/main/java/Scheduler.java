@@ -21,7 +21,6 @@ class Scheduler{
     private volatile int cpu_on;
     private volatile int cpu_off;
     private volatile int clock;
-    private int prom;
 
     // **************************************************** Variables to control scheduler ****************************************************
 
@@ -83,7 +82,7 @@ class Scheduler{
         this.CPUtimeslice = 0;
         this.IOtimeslice = 0;
         this.noMoreProcess = false;
-        this.processTable = new HashMap<>();
+        this.processTable = new HashMap<String, Process>();
         this.currentCPU_Updated = false;
         this.currentIO_Updated = false;
         this.canCPUCurrentChange = false;
@@ -92,13 +91,15 @@ class Scheduler{
         this.currentToBQ = false;
         this.currentToTree = false;
         this.needDecision = false;
-        this.prio_to_wight = new HashMap<>();
+        this.prio_to_wight = new HashMap<Integer, Integer>();
         this.producedToTree = false;
         this.cpu_off = 0;
         this.cpu_on = 0;
         this.clock = 0;
-        this.schedulerTable = new HashMap<>();
-        this.schedEntityTable = new HashMap<>();
+        this.schedulerTable = new HashMap<String, Object>();
+        this.schedEntityTable = new HashMap<String, SchedEntity>();
+        this.currentIOProcess = null;
+        this.currentProcess = null;
         
         
     }
@@ -114,7 +115,7 @@ class Scheduler{
                 /*  10 */       110,        87,        70,        56,        45,
                 /*  15 */        36,        29,        23,        18,        15,
             };
-            for(int i=0; i <= 35; i++){
+            for(int i=0; i < 40; i++){
                 this.prio_to_wight.put(i-20, weight[i]);
             }
         }
@@ -133,7 +134,7 @@ class Scheduler{
 
         public boolean processHaveCPU(){
             for (Process i : processTable.values()) {
-                if(i.get_tiempo_cpu() > 0){
+                if(i.getTiempoCpu() > 0){
                     return true;
                 }
             }
@@ -142,7 +143,7 @@ class Scheduler{
 
         public boolean processHaveIO(){
             for (Process i : processTable.values()) {
-                if(i.get_tiempo_io() > 0){
+                if(i.getTiempoIo() > 0){
                     return true;
                 }
             }
@@ -160,7 +161,7 @@ class Scheduler{
         public int calculateTimeslice(Process p){
             int weights = readyTree.weights();
             if(weights != 0){
-                return (int) p.get_schedEntity().get_weight() / readyTree.weights();
+                return (int) p.getSchedEntity().get_weight() / readyTree.weights();
                 //return 1000;
             }
             return 1000;
@@ -169,19 +170,82 @@ class Scheduler{
 
         public HashMap<String, Object> getSchedulerData(){
             this.schedulerTable.clear();
-            LinkedList<String> keysTree = readyTree.keys();
+            //LinkedList<String> keysTree = readyTree.keys();
             LinkedList<String> keysBQ = new LinkedList<String>();
             for(Process i : blockQueue){
-                keysBQ.add(i.get_pid());
+                keysBQ.add(i.getPid());
             }
-            this.schedulerTable.put("tree", keysTree);
+            //this.schedulerTable.put("tree", keysTree);
             this.schedulerTable.put("blockQueue", keysBQ);
             this.schedulerTable.put("processTable", processTable);
             this.schedulerTable.put("schedEntityTable", schedEntityTable);
             this.schedulerTable.put("currentInCPU", currentProcess);
             this.schedulerTable.put("currentInIO", currentIOProcess);
             return this.schedulerTable;
-        } 
+        }
+        public HashMap<String, Process> getProcessTable(){
+            return this.processTable;
+        }
+
+        public HashMap<String, SchedEntity> getSchedEntity(){
+            return  this.readyTree.keys();
+        }
+
+        public LinkedList<String> getBlockQueue(){
+            LinkedList<String> keysBQ = new LinkedList<String>();
+            for(Process i : blockQueue){
+                keysBQ.add(i.getPid());
+            }
+            return  keysBQ;
+        }
+
+        public String getCurrent(){
+            if(this.currentProcess != null){
+                return this.currentProcess.getPid();
+            }else{
+                return("EMPTY");
+            }
+
+        }
+
+        public String getCurrentIO(){
+            if(this.currentIOProcess != null){
+                return this.currentIOProcess.getPid();
+            }else{
+                return("EMPTY");
+            }
+
+        }
+
+        public int calculateTimeProm(){
+            int aux=0;
+            int prom = 0;
+            for (Process i : processTable.values()) {
+                aux++;
+                prom = prom + i.get_execTime();
+            }
+            return prom / aux;
+        }
+
+        public int processTableSize(){
+            return  this.processTable.size();
+        }
+
+        public int getCpuOn(){
+            int sum = cpu_off + cpu_on;
+            int porc = (cpu_on * 100) / sum;
+            return porc;
+        }
+
+        public int getCpuOff(){
+            int sum = cpu_off + cpu_on;
+            int porc = (cpu_off * 100) / sum;
+            return porc;
+        }
+
+        public int getTotalTime(){
+            return cpu_on + cpu_off;
+        }
 
         // Debo actualizar el CPUTimeslice para que se asigne a esto y no al vruntime
         // Tambien debo asignar un iotimeslice constante y parametrizable 
@@ -201,7 +265,7 @@ class Scheduler{
 
                             sleep(CPUtimeslice);
 
-                            writeToScreen("Termino de correr en el cpu: " +  currentProcess.get_pid());
+                            writeToScreen("Termino de correr en el cpu: " +  currentProcess.getPid());
 
                             finishCPUTime = true;
 
@@ -232,7 +296,7 @@ class Scheduler{
                         
                             if(ioSet){
 
-                                writeToScreen("IO SIM con: " + currentIOProcess.get_pid() + " WITH TIMESLICE : " + Integer.toString(currentIOProcess.get_tiempo_io()));
+                                writeToScreen("IO SIM con: " + currentIOProcess.getPid() + " WITH TIMESLICE : " + Integer.toString(currentIOProcess.getTiempoIo()));
 
                                 sleep(1000);
 
@@ -267,15 +331,15 @@ class Scheduler{
 
                         currentProcess.update_cputime();
 
-                        writeToScreen("CPU time updated: " + Integer.toString(currentProcess.get_tiempo_cpu()));
+                        writeToScreen("CPU time updated: " + Integer.toString(currentProcess.getTiempoCpu()));
 
                         currentProcess.update_execTime(CPUtimeslice);
 
                         writeToScreen("Exec time: " + Integer.toString(currentProcess.get_execTime()));
 
-                        currentProcess.get_schedEntity().set_vruntime(updateVruntime());
+                        currentProcess.getSchedEntity().set_vruntime(updateVruntime());
 
-                        writeToScreen("Vruntime updated: " + Integer.toString(currentProcess.get_schedEntity().get_vruntime()) + "de " + currentProcess.get_pid());
+                        writeToScreen("Vruntime updated: " + Integer.toString(currentProcess.getSchedEntity().getVruntime()) + "de " + currentProcess.getPid());
 
                         currentCPU_Updated = true;
     
@@ -293,13 +357,13 @@ class Scheduler{
                 {
                     if(currentToTree){
                         
-                        readyTree.insert(currentProcess.get_schedEntity().get_vruntime(),currentProcess.get_schedEntity());
+                        readyTree.insert(currentProcess.getSchedEntity().getVruntime(),currentProcess.getSchedEntity());
 
                         canCPUCurrentChange = true;
 
                         currentToTree = false;
 
-                        writeToScreen("Process added to tree: " + currentProcess.get_pid());
+                        writeToScreen("Process added to tree: " + currentProcess.getPid());
 
                     }
 
@@ -328,14 +392,14 @@ class Scheduler{
 
                         SchedEntity min = min_aux.schedEntity;
 
-                        Process min_process = processTable.get(min.get_pid());
+                        Process min_process = processTable.get(min.getPid());
 
                         readyTree.deleteMin();
 
-                        writeToScreen("Process deleted from tree: " + min.get_pid());
+                        writeToScreen("Process deleted from tree: " + min.getPid());
 
                         
-                        currentPID = min_process.get_pid();
+                        currentPID = min_process.getPid();
 
                         currentProcess = min_process;
 
@@ -357,13 +421,13 @@ class Scheduler{
 
                             SchedEntity min = min_aux.schedEntity;
 
-                            Process min_process = processTable.get(min.get_pid());
+                            Process min_process = processTable.get(min.getPid());
         
                             readyTree.deleteMin();
         
-                            writeToScreen("Process deleted from tree: " + min.get_pid());
+                            writeToScreen("Process deleted from tree: " + min.getPid());
         
-                            currentPID = min_process.get_pid();
+                            currentPID = min_process.getPid();
         
                             currentProcess = min_process;
     
@@ -399,11 +463,11 @@ class Scheduler{
 
                     if(finishCPUTime && currentCPU_Updated && needDecision){
 
-                        if(currentProcess.get_tiempo_io() > 0){
+                        if(currentProcess.getTiempoIo() > 0){
 
                             currentToBQ = true;
 
-                        }else if(currentProcess.get_tiempo_cpu() > 0){
+                        }else if(currentProcess.getTiempoCpu() > 0){
 
                             currentToTree = true;
 
@@ -428,7 +492,7 @@ class Scheduler{
                     
                     blockQueue.add(currentProcess);
 
-                    writeToScreen("PROCESS ADDED TO BLOCK QUEUE: " + currentProcess.get_pid() + "Con tiempo IO: " + Integer.toString(currentProcess.get_tiempo_io()));
+                    writeToScreen("PROCESS ADDED TO BLOCK QUEUE: " + currentProcess.getPid() + "Con tiempo IO: " + Integer.toString(currentProcess.getTiempoIo()));
 
                     canCPUCurrentChange = true;
 
@@ -453,7 +517,7 @@ class Scheduler{
 
                         currentIOProcess.update_iotime();
 
-                        writeToScreen("IO TIME UPDATED DE : " + currentIOProcess.get_pid() + " " + Integer.toString(currentIOProcess.get_tiempo_io()));
+                        writeToScreen("IO TIME UPDATED DE : " + currentIOProcess.getPid() + " " + Integer.toString(currentIOProcess.getTiempoIo()));
     
                         // Verifico que haya procesos con tiempo de IO
                         currentIO_Updated = true;
@@ -473,11 +537,11 @@ class Scheduler{
                 {
                     if(finishIOTime && currentIO_Updated && !producedToTree){
 
-                        if(currentIOProcess.get_tiempo_cpu() > 0){
+                        if(currentIOProcess.getTiempoCpu() > 0){
     
-                            readyTree.insert(currentIOProcess.get_schedEntity().get_vruntime(),currentIOProcess.get_schedEntity());
+                            readyTree.insert(currentIOProcess.getSchedEntity().getVruntime(),currentIOProcess.getSchedEntity());
     
-                            writeToScreen("PROCESS INSERTED TO TREE FROM BQ: " + currentIOProcess.get_pid() + " with vruntime: " + currentIOProcess.get_schedEntity().get_vruntime());
+                            writeToScreen("PROCESS INSERTED TO TREE FROM BQ: " + currentIOProcess.getPid() + " with vruntime: " + currentIOProcess.getSchedEntity().getVruntime());
                         }
                         canIOCurrentChange = true;
                         producedToTree = true;
@@ -512,9 +576,9 @@ class Scheduler{
                 
                     currentIOProcess = p;
 
-                    //IOtimeslice = p.get_tiempo_io();
+                    //IOtimeslice = p.getTiempoIo();
 
-                    writeToScreen("IO EMPTY PROCESS DELETED FROM BLOCK QUEUE: " + currentIOProcess.get_pid() + " WITH TIMESLICE: " + Integer.toString(currentIOProcess.get_tiempo_io()));
+                    writeToScreen("IO EMPTY PROCESS DELETED FROM BLOCK QUEUE: " + currentIOProcess.getPid() + " WITH TIMESLICE: " + Integer.toString(currentIOProcess.getTiempoIo()));
 
                     ioEmpty = false;
 
@@ -536,11 +600,11 @@ class Scheduler{
                         }
                         writeToScreen("Sali de aqui");
 
-                        //IOtimeslice = p.get_tiempo_io();
+                        //IOtimeslice = p.getTiempoIo();
     
                         currentIOProcess = p;
     
-                        writeToScreen("PROCESS DELETED FROM BLOCK QUEUE: " + currentIOProcess.get_pid() + " WITH IOTIME: " + Integer.toString(currentIOProcess.get_tiempo_io()));
+                        writeToScreen("PROCESS DELETED FROM BLOCK QUEUE: " + currentIOProcess.getPid() + " WITH IOTIME: " + Integer.toString(currentIOProcess.getTiempoIo()));
     
                         finishIOTime = false;
     
@@ -579,13 +643,13 @@ class Scheduler{
 
                     SchedEntity schedEntity = process.createSchedEntity(prio_to_wight.get(process.get_prioridad()));
 
-                    schedEntityTable.put(schedEntity.get_pid(), schedEntity);
+                    //schedEntityTable.put(schedEntity.getPid(), schedEntity);
 
                     readyTree.insert(0, schedEntity);
 
                     System.out.println("Process added to tree from new list: ");
 
-                    System.out.println(process.get_pid());
+                    System.out.println(process.getPid());
                     //sleep(1000);
                     
                 }catch(InterruptedException e){
@@ -624,7 +688,6 @@ class Scheduler{
             }
             System.out.println("El tiempo del CPU activo fue de: " + cpu_on + " ms");
             System.out.println("El tiempo del CPU inactivo fue de: " + cpu_off + " ms");
-
         }
     }
 
@@ -644,15 +707,7 @@ class Scheduler{
         }
 
     }
-    public int calculateTimeProm(){
-    	int aux=0;
-    	for (Process i : processTable.values()) {
-    		aux++;
-    	    prom = prom + i.get_execTime();
-    	}
-    	return prom / aux;
-    }
-    public void executeScheduler(String nameFile) { //Aqui corremos el hilo de iniciar el Scheduler
+    public void executeScheduler() { //Aqui corremos el hilo de iniciar el Scheduler
         
         // Init threads
         initSchedulerThread init = new initSchedulerThread(); 
@@ -671,9 +726,10 @@ class Scheduler{
 
         fillWeight();
         System.out.println("Weights filled");
-        newProcesses = Parser.ParseToProcess(nameFile);
+        System.out.println(prio_to_wight);
+        newProcesses = Parser.ParseToProcess("src/main/resources/procesos1.json");
         for (Process process : newProcesses) {
-            processTable.put(process.get_pid(), process);
+            processTable.put(process.getPid(), process);
         }
         
         init.start();
@@ -690,9 +746,7 @@ class Scheduler{
         clock.start();
         clockCPU.start();
         //System.out.println("?");
-
-
-    
+        
         
 
     }

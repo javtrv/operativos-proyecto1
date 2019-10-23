@@ -14,7 +14,7 @@ public class SchedEntity{
         this.vRuntime = newVruntime;
     }
 
-    public String get_pid(){
+    public String getPid(){
         return this.pid;
     }
 
@@ -22,7 +22,7 @@ public class SchedEntity{
         return this.weight;
     }
 
-    public int get_vruntime(){
+    public int getVruntime(){
         return this.vRuntime;
     }
 

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1274.0" text="Scheduler" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="821.0" prefWidth="1058.0">
+         <children>
+            <ListView fx:id="listView" layoutX="649.0" layoutY="51.0" prefHeight="327.0" prefWidth="273.0" />
+            <TableView fx:id="tableView" layoutX="48.0" layoutY="428.0" prefHeight="301.0" prefWidth="608.0">
+            </TableView>
+            <TableView fx:id="tableView_" layoutX="14.0" layoutY="51.0" prefHeight="327.0" prefWidth="296.0">
+            </TableView>
+            <Text layoutX="117.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STATE READY" />
+            <Text layoutX="433.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STATE RUNNING" />
+            <Text layoutX="741.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STATE BLOCK" />
+            <Text layoutX="1094.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IO" />
+            <Text layoutX="299.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROCESS TABLE" />
+            <Circle layoutX="487.0" layoutY="215.0" opacity="0.34" radius="100.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop color="#1670a100" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Circle>
+            <Label fx:id="label1" layoutX="450.0" layoutY="207.0" text="Label" textAlignment="CENTER" textFill="#0d0d0d">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Text layoutX="423.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT RUNNING" />
+            <Text layoutX="474.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPU" />
+            <Circle layoutX="1101.0" layoutY="215.0" opacity="0.34" radius="100.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop color="#1670a100" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
+            </Circle>
+            <Text layoutX="1052.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT IN IO" />
+            <Label fx:id="label2" layoutX="1065.0" layoutY="207.0" text="Label" textAlignment="CENTER" textFill="#0d0d0d">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Text layoutX="924.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STATISTICS" />
+            <Label fx:id="cpuON" layoutX="925.0" layoutY="441.0" text="Label" textAlignment="JUSTIFY" textFill="#0d0d0d">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="cpuOFF" layoutX="925.0" layoutY="491.0" text="Label" textAlignment="JUSTIFY" textFill="#0d0d0d">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Text layoutX="770.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\% CPU ON" />
+            <Text layoutX="770.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\% CPU OFF" />
+            <Text layoutX="769.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EJECUCION PROMEDIO" />
+            <Label fx:id="timeProm" layoutX="925.0" layoutY="533.0" text="Label" textAlignment="JUSTIFY" textFill="#0d0d0d">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Text layoutX="769.0" layoutY="603.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROCESOS" />
+            <Text layoutX="770.0" layoutY="646.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIEMPO EN EL SIM" />
+            <Label fx:id="totalProc" layoutX="925.0" layoutY="574.0" text="Label" textAlignment="JUSTIFY" textFill="#0d0d0d">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="time" layoutX="925.0" layoutY="616.0" text="Label" textAlignment="JUSTIFY" textFill="#0d0d0d">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+  </content>
+</TitledPane>

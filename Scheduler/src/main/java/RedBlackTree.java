@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 
 // Red Black Tree implementation in Java
@@ -64,18 +65,18 @@ public class RedBlackTree {
 		return searchTreeHelper(node.right, key);
 	}
 
-	public LinkedList<String> keys(){
-		LinkedList<String> list = new LinkedList<String>();
+	public HashMap<String,SchedEntity> keys(){
+		HashMap<String,SchedEntity> list = new HashMap<String,SchedEntity>();
 		return keys(root, list);
 	}
 
-	public LinkedList<String> keys(Node root, LinkedList<String> list){ 
+	public HashMap<String,SchedEntity> keys(Node root, HashMap<String,SchedEntity> list){
 		if(root==TNULL){
 			return list;
 		}
 		
 		keys(root.left, list);
-		list.add(root.schedEntity.get_pid());
+		list.put(root.schedEntity.getPid(), root.schedEntity);
 		keys(root.right, list);
 		return list;
 	}

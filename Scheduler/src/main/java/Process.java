@@ -3,7 +3,7 @@
  */
 import java.util.*; 
 
-public class Process implements Comparable<Process> {
+public class Process implements Comparable<Process>  {
 
     private String pid;
     private int tiempoLlegada;
@@ -11,7 +11,6 @@ public class Process implements Comparable<Process> {
     private int tiempoIO;
     private int prioridad;
     private int execTime;
-    private int totalTimeEx;
     private SchedEntity schedEntity;
 
 
@@ -30,11 +29,11 @@ public class Process implements Comparable<Process> {
         return this.schedEntity;
     }
 
-    public SchedEntity get_schedEntity(){
+    public SchedEntity getSchedEntity(){
         return this.schedEntity;
     }
 
-    public String get_pid(){
+    public String getPid(){
         return pid;
     }
 
@@ -55,7 +54,7 @@ public class Process implements Comparable<Process> {
     }
 
 
-    public int get_tiempo_cpu(){
+    public int getTiempoCpu(){
         return this.tiempoCPU;
     }
 
@@ -65,13 +64,14 @@ public class Process implements Comparable<Process> {
     }
 
 
-    public int get_tiempo_io(){
+    public int getTiempoIo(){
         return this.tiempoIO;
     }
 
     public int get_execTime(){
         return this.execTime;
     }
+
 
     @Override
     public String toString() {
@@ -88,4 +88,5 @@ public class Process implements Comparable<Process> {
             return 1;
         }
     }
+
 }
