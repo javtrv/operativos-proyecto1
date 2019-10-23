@@ -18,11 +18,21 @@ Con la siguiente estructura (donde N es el numero de veces que se va a repetir):
   }
 ]
 
-Para correr el proyecto se deben usar los siguientes comandos:
+# Como probar
 
+Para correr el proyecto se recomienda usar INTELLIJ para manejar facilmente las dependencias.
 
-make
-make run file="<nombre del archivo>"
+Para correr el proyecto sin interfaz:
+
+Ir a la rama scheduler
+
+Usar:
+
+make 
+
+make run file=""
+
+Donde file es el archivo de pruebas.
 
 # Estructuras
 
