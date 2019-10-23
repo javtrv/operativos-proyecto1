@@ -21,6 +21,7 @@ class Scheduler{
     private volatile int cpu_on;
     private volatile int cpu_off;
     private volatile int clock;
+    private int prom;
 
     // **************************************************** Variables to control scheduler ****************************************************
 
@@ -607,6 +608,7 @@ class Scheduler{
 
 
     class ClockCPU extends Thread{
+    	int aux=0;
         @Override
         public void run(){
 
@@ -624,8 +626,12 @@ class Scheduler{
             System.out.println("El tiempo del CPU activo fue de: " + cpu_on + " ms");
             System.out.println("El tiempo del CPU inactivo fue de: " + cpu_off + " ms");
             for (Process i : processTable.values()) {
+            	aux++;
                 System.out.println(i);
+                prom = prom + i.get_execTime();
             }
+            prom = prom / aux;
+            System.out.println("El promedio de uso del CPU fue de : " + prom + " ms");
         }
     }
 
