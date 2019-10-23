@@ -608,7 +608,6 @@ class Scheduler{
 
 
     class ClockCPU extends Thread{
-    	int aux=0;
         @Override
         public void run(){
 
@@ -625,13 +624,7 @@ class Scheduler{
             }
             System.out.println("El tiempo del CPU activo fue de: " + cpu_on + " ms");
             System.out.println("El tiempo del CPU inactivo fue de: " + cpu_off + " ms");
-            for (Process i : processTable.values()) {
-            	aux++;
-                System.out.println(i);
-                prom = prom + i.get_execTime();
-            }
-            prom = prom / aux;
-            System.out.println("El promedio de uso del CPU fue de : " + prom + " ms");
+
         }
     }
 
@@ -650,6 +643,14 @@ class Scheduler{
             System.out.println("El tiempo total fue de: " + clock + " ms");
         }
 
+    }
+    public int calculateTimeProm(){
+    	int aux=0;
+    	for (Process i : processTable.values()) {
+    		aux++;
+    	    prom = prom + i.get_execTime();
+    	}
+    	return prom / aux;
     }
     public void executeScheduler(String nameFile) { //Aqui corremos el hilo de iniciar el Scheduler
         
